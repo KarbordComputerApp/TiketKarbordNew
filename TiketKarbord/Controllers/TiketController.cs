@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace TiketKarbord.Controllers.ERJ
 {
@@ -13,7 +9,7 @@ namespace TiketKarbord.Controllers.ERJ
             return View();
         }
 
-        public ActionResult Erja()
+        public ActionResult Tiket()
         {
             return View();
         }

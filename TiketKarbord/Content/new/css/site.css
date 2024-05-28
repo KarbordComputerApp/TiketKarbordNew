@@ -2022,3 +2022,8 @@ input[type="checkbox"] {
     direction: ltr !important;
     font-family: Merriweather-Light !important;
 }
+
+
+.form-group {
+    margin-bottom: 0.5rem;
+}

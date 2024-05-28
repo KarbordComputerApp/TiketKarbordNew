@@ -18,12 +18,6 @@ namespace TiketKarbord
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Login", id = UrlParameter.Optional }
             );
-
-            routes.MapRoute(
-            "Error",
-             "{*url}",
-                 new { controller = "Home", action = "Login" }  // 404s
-            );
         }
     }
 }

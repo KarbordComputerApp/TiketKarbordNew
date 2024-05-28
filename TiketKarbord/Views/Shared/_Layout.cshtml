@@ -27,7 +27,7 @@
         </div>
     </div>
 
-  
+
 
 
     <div class="overlay"></div>
@@ -93,7 +93,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                             
+
                             </li>
                         </ul>
 
@@ -108,7 +108,7 @@
                         </a>
                     </li>
 
-                  
+
 
                     <li class="dropdown pull-left notification" id="P_NotificationErja">
                         <a href="/ERJ/Erja" title="تیکت دریافتی">
@@ -117,14 +117,14 @@
                         </a>
                     </li>
 
-                  
+
                     <li class="dropdown pull-left" id="P_ContactUs" title="تماس با ما">
-                        <a id="btn_App" href="https://karbordcomputer.com/contact-us/" target="_blank">
+                        <a id="btn_App" href="https://karbordcomputer.com/contact-us/">
                             <img src="~/Content/img/ContactUs.png" width="18" height="18" style="margin-top: 5px;margin-bottom: 0px;" />
                         </a>
                     </li>
 
-                   
+
                     <li class="dropdown pull-left" id="P_App" title="راهنمای کلید های میانبر">
                         <a id="HotKeyHelp" class="dropdown-toggle" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modal-HotKeyHelp">
                             <img src="~/Content/img/keyboard.png" width="32" style="margin-top: 10px;" />
@@ -149,12 +149,12 @@
                     </div>
                     <div class="profile-usertitle">
                         <!--<div class="sidebar-userpic-name" id="TextUserName"></div>
-                        <div class="profile-usertitle-job " id="TextNoUser"></div>-->
+            <div class="profile-usertitle-job " id="TextNoUser"></div>-->
                         <div class="profile-usertitle-job ">
                             <span id="titleVer">@(TiketKarbord.Controllers.Unit.UnitPublic.titleVer) :</span>
                             <span id="titleVerNumber" style="padding-right:5px">@(TiketKarbord.Controllers.Unit.UnitPublic.titleVerNumber)</span>
                             <br />
-                           <span id="titleVer">ورژن سرویس : 521</span>
+                            <span id="titleVer">ورژن سرویس : 521</span>
                             <span id="titleVerNumber" style="padding-right:5px"></span>
                             <br />
                         </div>
@@ -163,31 +163,49 @@
                 </li>
 
 
-                <li id="ErjaDOC_Menu" class="active">
+                <li id="Erj_Menu" class="active">
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i>
                             <img src="~/Content/img/SanadAnbarWhite.png" width="20" />
                         </i>
-                        <span>اسناد اتوماسیون</span>
+                        <span>ارجاعات</span>
                     </a>
                     <ul class="ml-menu">
-
-                        <li id="ErjaDOC" class="rightClick">
-                            <a class="useBlank" target="_blank" href=@Url.Action("Index","Tiket")>تیکت ها</a>
+                        <li id="ErjDOC" class="rightClick">
+                            <a href=@Url.Action("Index","Erj")>پرونده</a>
                         </li>
-                        <li id="Erja_Resive" class="rightClick">
-                            <a class="useBlank" target="_blank" href=@Url.Action("Erja","Tiket")> تیکت دریافتی</a>
+                        <li id="Erj_Resive" class="rightClick">
+                            <a href=@Url.Action("Erja","Erj")>ارجاعات پرونده دریافتی</a>
                         </li>
-                        <li id="Erja_Send" class="rightClick">
-                            <a class="useBlank" target="_blank" href=@Url.Action("Erja","Tiket")> تیکت ارسالی</a>
+                        <li id="Erj_Send" class="rightClick">
+                            <a href=@Url.Action("Erja","Erj")>ارجاعات پرونده ارسالی</a>
                         </li>
-                        <!--
-                        <li id="ErjaDOC">@Html.ActionLink("پرونده", "Index", "ERJ")</li>
-                        <li id="Erja_Resive">@Html.ActionLink("ارجاعات پرونده دریافتی", "Erja", "ERJ")</li>
-                        <li id="Erja_Send">@Html.ActionLink("ارجاعات پرونده ارسالی", "Erja", "ERJ")</li>
-                            -->
                     </ul>
                 </li>
+
+
+                <li id="Tiket_Menu">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i>
+                            <img src="~/Content/img/SanadAnbarWhite.png" width="20" />
+                        </i>
+                        <span>تیکت</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li id="TiketDOC" class="rightClick">
+                            <a href=@Url.Action("Index","Tiket")>تیکت ها</a>
+                        </li>
+                        <li id="Tiket_Resive" class="rightClick">
+                            <a href=@Url.Action("Tiket","Tiket")> تیکت دریافتی</a>
+                        </li>
+                        <li id="Tiket_Send" class="rightClick">
+                            <a href=@Url.Action("Tiket","Tiket")> تیکت ارسالی</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
 
             </ul>
         </div>
@@ -234,10 +252,7 @@
                     </div>
                     <h4 class="modal-title" id="titleComm">توضیحات</h4>
                     <div>
-                        <a class="insertComm" title="لیست عبارات تعریف شده" style="margin-left: 5px;">
-                            <img src="/Content/img/sanad/list-add.png" width="20" height="20">
-                        </a>
-                        <a class="saveStatement" title="ذخیره متن در عبارات تعریف شده"><span class="material-icons" style="font-size:20px;float:left">save</span></a>
+                      
                     </div>
 
                 </div>
@@ -323,9 +338,11 @@
     <script src="~/Scripts/app.js?dt=@(TiketKarbord.Controllers.Unit.UnitPublic.titleVerNumber)"></script>
     <script src="~/Scripts/PublicAFI.js?dt=@(TiketKarbord.Controllers.Unit.UnitPublic.titleVerNumber)"></script>
     <script src="~/Content/js/sweet2.js"></script>
+
     <script src="~/Content/new/js/jquery.md.bootstrap.datetimepicker.js"></script>
     <script src="~/Content/new/js/jquery.md5.js"></script>
     <script src="~/Content/new/js/farsiInput.js"></script>
+
     @RenderSection("scripts", false)
 
 </body>

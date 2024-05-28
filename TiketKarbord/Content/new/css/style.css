@@ -10694,12 +10694,9 @@ table .checkbox [type="checkbox"] + label {
  *  Description: This scss file for checkbox and radio button style classes
  */
 [type="checkbox"] + label {
-    padding-left: 26px;
-    height: 25px;
-    line-height: 21px;
-    font-size: 13px;
-    font-weight: normal;
-    vertical-align: middle;
+    height: 29px;
+    font-size: 11px;
+    padding-right: 5px;
 }
 
 [type="checkbox"]:checked + label:before {
