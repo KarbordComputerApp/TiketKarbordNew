@@ -18,7 +18,7 @@ var key_F8 = 119;
 var key_F9 = 120;
 var key_F10 = 121;
 var key_F11 = 122;
-var key_F12 = 123;
+var key_F12 = 123; 
 
 var key_Space = 32;
 var key_BackSpace = 8;
