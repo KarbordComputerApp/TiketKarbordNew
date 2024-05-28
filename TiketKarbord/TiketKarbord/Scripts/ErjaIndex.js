@@ -16,7 +16,7 @@
     self.RepToUsersList = ko.observableArray([]); // لیست ارجاع شونده / دهنده 
     self.DocAttachList = ko.observableArray([]); // ليست پیوست
     self.TestDoc_DeleteList = ko.observableArray([]); // لیست تست حذف 
-
+     
 
     var ErjDocHUri = server + '/api/KarbordData/ErjDocH/'; // آدرس پرونده ها  
     var ErjDocErjaUri = server + '/api/KarbordData/ErjDocErja/'; // آدرس  ارجاع
@@ -32,7 +32,7 @@
 
 
 
-    self.p_DocDate = ko.observable('');
+    self.p_DocDate = ko.observable(''); 
     self.p_MhltDate = ko.observable('');
     self.p_AmalDate = ko.observable('');
     self.p_EndDate = ko.observable('');

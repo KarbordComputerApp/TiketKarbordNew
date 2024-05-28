@@ -2,7 +2,7 @@
 var server = "http://localhost:52798/";
 //var server = 'http://192.168.0.106:1000';  
 
-var userName = localStorage.getItem('userNameTiket');
+var userName = localStorage.getItem('userNameTiket'); 
 //var pass = localStorage.getItem('password');
 
 var dateNow;

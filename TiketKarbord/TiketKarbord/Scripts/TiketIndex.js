@@ -219,7 +219,7 @@
             F20: '',
             Motaghazi: p_Motaghazi,
             IP: ipw,
-            CallProg: 'Web',
+            CallProg: 'Web', 
             LoginLink: false,
             ChatMode: 0,
             ChatActive: p_ActiveChat

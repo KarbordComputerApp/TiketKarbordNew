@@ -304,7 +304,7 @@
     self.FilterErj = ko.computed(function () {
         var filter = self.FilterErjValue();
         return ko.utils.arrayFilter(self.ErjDocErja(), function (item) {
-            return item.BandNo == filter;
+            return item.BandNo == filter; 
         });
     });
 

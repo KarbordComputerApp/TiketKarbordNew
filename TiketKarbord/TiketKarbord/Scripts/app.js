@@ -3,7 +3,7 @@ $("input.int").keydown(function (e) {
     if (e.ctrlKey) {
         // CTRL + INS
         if (!((e.keyCode == 45) ||
-            // CTRL + C
+            // CTRL + C 
             (e.keyCode == 67) ||
             // CTRL + V
             (e.keyCode == 86))) {

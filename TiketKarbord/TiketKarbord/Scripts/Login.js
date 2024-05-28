@@ -2,7 +2,7 @@
     var user = "";
     var pass = "";
 
-    sessionStorage.SelectMenu = '';
+    sessionStorage.SelectMenu = ''; 
 
     var LoginUri = server + '/api/KarbordData/Login/';
 

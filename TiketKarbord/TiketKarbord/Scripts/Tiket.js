@@ -14,7 +14,7 @@
     self.ErjXResultList = ko.observableArray([]); // لیست نتیجه 
     self.ErjDocTiket = ko.observableArray([]); // لیست پرونده  
 
-    var serialTiket = 0;
+    var serialTiket = 0; 
     var lockNoTiket = 0;
     var TiketMode = sessionStorage.ModeCodeTiket;
 
