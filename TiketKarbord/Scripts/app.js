@@ -14,7 +14,7 @@ $("input.int").keydown(function (e) {
     }
     else {
         if (e.shiftKey) {
-            // SHIFT + TAB
+            // SHIFT + TAB 
             if (!((e.keyCode == 9) ||
                 // SHIFT + LEFT ARROW KEY
                 (e.keyCode == 37) ||
