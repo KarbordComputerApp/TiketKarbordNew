@@ -480,6 +480,73 @@
 
     })
 
+    $('#specialComm').click(function () {
+        if (SpecialCommTrs == 1) {
+            if ($("#specialComm").css('font-style') == 'italic') {
+                TextHighlightDel("#specialComm");
+                $("#specialComm").attr('readonly', false);
+                $("#specialComm").val(specialComm);
+            }
+        }
+        else
+            showNotification(translate('دسترسی ندارید'), 0);
+    })
+
+
+    $('#ShowEghdamComm').click(function () {
+        $('#titleComm').text(translate('توضیحات اقدام'));
+        $('#commPublic').attr("style", "");
+        $('#codeComm').text('EghdamComm');
+        $('#commPublic').attr('readonly', true);
+        $('#commPublic').val($('#eghdamComm').val());
+        $('#modal-Comm').modal('show');
+    });
+
+    $('#ShowDocDesc').click(function () {
+        $('#titleComm').text(translate('توضیحات عمومی'));
+        $('#commPublic').attr("style", "");
+        $('#codeComm').text('DocDesc');
+        $('#commPublic').attr('readonly', true);
+        $('#commPublic').val($('#docDesc').val());
+        $('#modal-Comm').modal('show');
+    });
+
+    $('#ShowSpecialComm').click(function () {
+        $('#codeComm').text('SpecialComm');
+        if (SpecialCommTrs == 1) {
+            if ($("#specialComm").css('font-style') == 'italic') {
+                $("#specialComm").attr('readonly', false);
+                TextHighlightDel("#specialComm");
+                $("#specialComm").val(specialComm);
+            }
+            $('#titleComm').text(translate('توضیحات مدیران'));
+            $('#commPublic').attr("style", "");
+            $('#commPublic').attr('readonly', false);
+            $('#commPublic').val($('#specialComm').val());
+            $('#modal-Comm').modal('show');
+        }
+    });
+
+
+    $('#ShowFinalComm').click(function () {
+        $('#codeComm').text('FinalComm');
+        $('#titleComm').text(translate('توضیحات نهایی'));
+        $('#commPublic').attr("style", "");
+        $('#commPublic').attr('readonly', false);
+        $('#commPublic').val($('#finalComm').val());
+        $('#modal-Comm').modal('show');
+    });
+
+
+    $('#ShowResult').click(function () {
+        $('#codeComm').text('Natijeh');
+        $('#titleComm').text(translate('نتیجه'));
+        $('#commPublic').attr("style", "");
+        $('#commPublic').attr('readonly', false);
+        $('#commPublic').val($('#Result').val());
+        $('#modal-Comm').modal('show');
+    });
+
 
 };
 

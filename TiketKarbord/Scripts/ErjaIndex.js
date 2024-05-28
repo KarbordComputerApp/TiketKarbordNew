@@ -4,10 +4,10 @@
     self.ErjDocHList = ko.observableArray([]); // لیست گزارش  
     self.FarayandList = ko.observableArray([]); // لیست فرایند 
     self.RelatedDocsList = ko.observableArray([]); // لیست گزارش  
-    self.MahramanehList = ko.observableArray([]); // لیست محرمانه 
-    self.ErjCustList = ko.observableArray([]); // ليست مشتریان
+    //self.MahramanehList = ko.observableArray([]); // لیست محرمانه 
+    //self.ErjCustList = ko.observableArray([]); // ليست مشتریان
     self.KhdtList = ko.observableArray([]); // لیست نوع کار ها
-    self.ErjStatusList = ko.observableArray([]); // لیست وضعیت 
+    //self.ErjStatusList = ko.observableArray([]); // لیست وضعیت 
     self.ErjDocYearsList = ko.observableArray([]); // لیست سال پرونده ها 
     self.ErjDocErja = ko.observableArray([]); // لیست پرونده  
     self.ErjResultList = ko.observableArray([]); // لیست نتیجه 
@@ -21,8 +21,8 @@
     var ErjDocHUri = server + '/api/KarbordData/ErjDocH/'; // آدرس پرونده ها  
     var ErjDocErjaUri = server + '/api/KarbordData/ErjDocErja/'; // آدرس  ارجاع
     var ErjResultUri = server + '/api/KarbordData/ErjResult/'; // آدرس نتیجه
-    var MahramanehUri = server + '/api/KarbordData/Mahramaneh/'; // آدرس محرمانه
-    var ErjStatusUri = server + '/api/KarbordData/ErjStatus/'; // آدرس وضعیت 
+    //var MahramanehUri = server + '/api/KarbordData/Mahramaneh/'; // آدرس محرمانه
+    //var ErjStatusUri = server + '/api/KarbordData/ErjStatus/'; // آدرس وضعیت 
     var ErjUsersUri = server + '/api/KarbordData/Web_ErjUsers/'; // آدرس کاربران زمان ارجاع
     
 
@@ -243,7 +243,7 @@
     }
 
 
-    self.ErjStatusList = ko.observableArray([]); // لیست وضعیت 
+    /*self.ErjStatusList = ko.observableArray([]); // لیست وضعیت 
     self.p_Status = ko.observable();
 
     function getErjStatusList() {
@@ -259,7 +259,7 @@
             });
         }
     }
-    getErjStatusList();
+    getErjStatusList();*/
 
 
 
@@ -313,7 +313,7 @@
         $('#p_DocDesc').val(item.DocDesc);
         //$('#p_SpecialComm').val(item.SpecialComm);
         $('#p_FinalComm').val(item.FinalComm);
-        $('#p_Mahramaneh').val(item.Mahramaneh);
+        $('#p_Mahramaneh').val(item.MahramanehName);
         $('#p_Status').val(item.Status);
 
         specialComm = item.SpecialComm;
@@ -508,7 +508,7 @@
 
   
 
-    function getMahramanehList() {
+    /*function getMahramanehList() {
 
         list = localStorage.getItem('Mahramaneh');
         if (list != null) {
@@ -524,7 +524,7 @@
     }
 
 
-    getMahramanehList();
+    getMahramanehList();*/
 
 
 
