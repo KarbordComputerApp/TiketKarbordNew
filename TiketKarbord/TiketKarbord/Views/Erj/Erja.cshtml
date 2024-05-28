@@ -1,0 +1,507 @@
+﻿@using TiketKarbord.Controllers.Unit;
+@{
+    ViewBag.Title = "لیست ازجاعات";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+</style>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card" style="margin-top:0px;">
+            <div class="header">
+                <div class="form-inline focused">
+                    <strong id="title_erja" style="margin-left: 5px; margin-right: 5px;"></strong>
+                    
+                    <div id="showDocBMode">
+                        <select id="DocBMode" data-bind="event:{ change: $root.DocBModeChange}" style="width: 150px;"></select>
+                    </div>
+
+                    <div id="buttom-header-dropdown" class="row header-dropdown m-r--5">
+                        <a id="refreshErja" class="">
+                            <img src="/Content/img/list/streamline-icon-synchronize-arrows-1@48x48.png" width="20" height="20" style="margin-left: 10px;">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- <h2><strong id="title_erja">ارجاعات پرونده دریافتی</strong></h2>
+                 <select id="DocBMode" data-bind="event:{ change: $root.DocBModeChange}"></select>-->
+
+
+            </div>
+            <div class="body">
+
+
+                <div data-bind="foreach: DocB_LastList" data-dismiss="modal" style="cursor: default;">
+                    <div class="card" style="margin:15px 5px 15px 5px" data-bind="style:{ 'background-color' :  'white' }">
+                        <div class="card-body">
+
+                            <div class="card-title">
+                                <h5 style="padding-left:15px"><span data-bind="text: CustName"></span></h5>
+                            </div>
+
+                            <div class="card-text">
+                                <div class="row">
+                                    <p style="padding-left:15px"> <span>شماره :</span> <span data-bind="text: DocNo"></span></p>
+                                    <p style="padding-left:15px"> <span>تاریخ :</span> <span data-bind="text: DocDate"></span></p>
+                                </div>
+                            </div>
+                            <p><span>ملاحظات :</span> <span data-bind="text: Spec "></span></p>
+                            <p><span>نام خدمات :</span> <span data-bind="text: KhdtName "></span></p>
+                            <a data-bind="click: $root.ViewErjDocErja" class="btn btn-primary pull-left">نمایش</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modal-ErjDocErja" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-entesab">
+        <div class="modal-content">
+            <div class="modal-header" style="    padding-bottom: 0px;    padding-top: 0px;">
+                <a id="Close_ModalErjDocErja" data-bind="attr: {title:text_Close}">
+                    <span aria-hidden="true" style="font-size:20px">&times;</span>
+                </a>
+                <h4 class="modal-title">ارجاع پرونده</h4>
+                <div>
+                    <a id="attachFile" class="dropdown-toggle" data-toggle="modal" data-target="#modal-DocAttach" data-backdrop="static" data-keyboard="false" style="margin-left: 10px;">
+                        <img src="/Content/img/list/attach_file.png" width="20" height="20">
+                    </a>
+                    <a id="OtherField" data-bind="attr: {title:text_OtherField}" class="dropdown-toggle" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modal-OtherField" style="margin-left: 10px;">
+                        <img src="/Content/img/sanad/paper-write.png" width="20" height="20">
+                    </a>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md col-sm">
+                        <div style="height:500px;overflow:auto;border: 1px #ddd solid;border-radius: 20px;">
+
+                            <div class="cardErj">
+                                <div class="header" style="background-color: #f5d3b4;">
+                                    <div class="row form-inline modal-header" style="padding:0px;">
+                                        <a id="ShowHideInformation">
+                                            <img id="imgInformation" src="~/Content/img/new item/minus-svgrepo-com.svg" style="width:16px" />
+                                        </a>
+                                        <h6>اطلاعات پرونده</h6>
+                                    </div>
+                                </div>
+                                <div class="body" style="padding:10px;">
+                                    <div>
+
+                                        <div class="row form-inline ">
+
+                                            <div class="row col-md-12">
+                                                <div class="col-md-4 col-sm-2">
+                                                    <div class="form-group form-float">
+                                                        <div class="form-line focused fix">
+                                                            <input type="text" id="m_docno" class="form-control int" readonly />
+                                                            <label class="form-label">شماره</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4 col-sm-5">
+                                                    <div class="form-group form-float">
+                                                        <div class="form-line focused fix">
+                                                            <input type="text" id="m_DocDate" class="form-control" readonly />
+                                                            <label class="form-label">تاریخ</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-md-4 col-sm-">
+                                                    <div class="form-group form-float">
+                                                        <div class="form-line focused fix">
+                                                            <input type="text" id="m_MhltDate" class="form-control" readonly />
+                                                            <label class="form-label">مهلت</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row col-md-12" style="padding-bottom:10px">
+                                                <div class="form-group form-float">
+                                                    <div class="form-line focused fix">
+                                                        <input type="text" id="m_Spec" class="form-control" />
+                                                        <label class="form-label" id="amounttext" data-bind="text:translate('ملاحظات')"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row col-md-12">
+                                                <div class="row col-md-6 col-sm-12" style="padding-bottom:10px">
+                                                    <div class="form-group form-float">
+                                                        <div class="form-line focused fix">
+                                                            <input type="text" id="m_CustName" class="form-control" readonly />
+                                                            <label class="form-label" data-bind="text:translate('مشتری')"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row col-md-6 col-sm-12" style="padding-bottom:10px">
+                                                    <div class="form-group form-float">
+                                                        <div class="form-line focused fix">
+                                                            <input type="text" id="m_KhdtName" class="form-control" readonly>
+                                                            <label class="form-label" data-bind="text:translate('نوع کار')"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div id="panelInformation" class="row col-md-12">
+
+                                                <div class="row col-md-12">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group form-float">
+                                                            <div class="form-line focused fix">
+                                                                <input type="text" id="m_MahramanehName" class="form-control" readonly />
+                                                                <label class="form-label">نوع</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group form-float">
+                                                            <div class="form-line focused fix">
+                                                                <input type="text" id="m_Eghdam" class="form-control" readonly />
+                                                                <label class="form-label" id="amounttext">اقدام</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group form-float">
+                                                            <div class="form-line focused fix">
+                                                                <input type="text" id="m_Tanzim" class="form-control" readonly>
+                                                                <label class="form-label">تنظیم</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row col-md-12">
+                                                    <label data-bind="text:translate('پرونده های مرتبط')" style="padding-left:10px"></label>
+                                                    <div id="m_RelatedDocs">
+                                                        <a class="RelatedDocument"></a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="cardErj">
+                                    <div class="header" style="background-color: #f5d3b4;">
+
+
+                                        <div class="row form-inline modal-header" style="padding:0px;">
+                                            <a id="ShowHideSpec">
+                                                <img id="imgSpec" src="~/Content/img/new item/minus-svgrepo-com.svg" style="width:16px" />
+                                            </a>
+                                            <h6>توضیحات پرونده</h6>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="body" style="padding:10px;">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 10px;">
+                                                        <!-- <a id="btn-eghdamComm" class="dropdown-toggle" data-toggle="modal" data-target="#modal-Comm">اقدام</a>-->
+                                                        <h6 id="ShowEghdamComm" style="cursor: pointer;">اقدام</h6>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group" style="margin-bottom: 0.5rem;">
+                                                            <div class="form-line">
+                                                                <textarea rows="1" id="eghdamComm" class="form-control no-resize auto-growth string autocomplete" style="border-bottom: 1px solid #ffffff;"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 10px;">
+                                                        <!--<a id="btn-DocDesc" class="dropdown-toggle" data-toggle="modal" data-target="#modal-Comm">عمومی</a> -->
+                                                        <h6 id="ShowDocDesc" style="cursor: pointer;">عمومی</h6>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group" style="margin-bottom: 0.5rem;">
+                                                            <div class="form-line">
+                                                                <textarea rows="1" id="docDesc" class="form-control no-resize auto-growth string autocomplete" style="border-bottom: 1px solid #ffffff;"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width: 10px;">
+                                                        <!-- <a id="btn-specialComm" class="dropdown-toggle" data-toggle="modal" data-target="#modal-Comm">مدیران</a>-->
+                                                        <h6 id="ShowSpecialComm" style="cursor: pointer;">مدیران</h6>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group" style="margin-bottom: 0.5rem;">
+                                                            <div class="form-line">
+                                                                <textarea rows="1" id="specialComm" style="border-bottom: 1px solid #ffffff;" class="form-control no-resize auto-growth string autocomplete"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 10px;">
+                                                        <!-- <a id="btn-finalComm" class="dropdown-toggle" data-toggle="modal" data-target="#modal-Comm">نهایی</a>-->
+                                                        <h6 id="ShowFinalComm" style="cursor: pointer;">نهایی</h6>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group" style="margin-bottom: 0.5rem;">
+                                                            <div class="form-line">
+                                                                <textarea rows="1" id="finalComm" style="border-bottom: 1px solid #ffffff;" class="form-control no-resize auto-growth string autocomplete"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div id="panel_Result">
+                                    <div class="header" style="background-color: #f5d3b4;">
+                                        <div class="row form-inline modal-header" style="padding:0px;">
+                                            <div>
+                                                <a id="ShowHideResult">
+                                                    <img id="imgResult" src="~/Content/img/new item/minus-svgrepo-com.svg" style="width:16px" />
+                                                </a>
+                                                <a id="ShowResult">
+                                                    <img src="~/Content/img/sanad/streamline-icon-pencil-write-3-alternate@48x48.png" style="width:16px" />
+                                                </a>
+                                            </div>
+                                            <h6>نتیجه</h6>
+
+                                        </div>
+                                    </div>
+                                    <div class="body" style="padding:10px;">
+
+                                        <div class="form-group" style="margin-bottom: 0.5rem;">
+                                            <div class="form-line">
+                                                <textarea rows="1" id="Result" class="form-control no-resize auto-growth string autocomplete"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div id="BodyErjDocH" style="height:500px;overflow:auto;border: 1px #ddd solid;border-radius: 20px;">
+
+
+
+                            <!--  <div style="border-top: 0px solid #fff !important;">
+                                  <div>
+                                      <div class="cardErj">
+                                          <div class="header" style="background-color: #e37d228f;">
+                                              <div class="form-inline">
+                                                  <div class="col-md-9 form-inline">
+                                                      <h6>1 ) سوپروایزر</h6>
+                                                      <img src="~/Content/img/new item/arrow-back-svgrepo-com.svg" style="width: 14px;margin-left: 3px; margin-right: 3px;" />
+                                                      <h6>حمید رضا حجازی</h6>
+                                                  </div>
+                                                  <div class="col-md-3 form-inline">
+                                                      <h6 style="padding-left: 10px">(1:0)</h6>
+                                                      <h6>1399/01/12</h6>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="body" style="padding:10px;">
+                                              <p>تست </p>
+                                              <p>مدیر سیستم به مهندس</p>
+                                              <br>
+                                              <div style="padding: 3px;margin: 0px 10px 0px 10px;background-color: #5b6775 !important;color: white;border-radius: 10px;">
+                                                  <div class=" form-inline">
+                                                      <h6> رونوشت به :کاربر 1 امیری</h6>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>-->
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="row  form-inline ">
+                    <div class="col-md-9 row">
+                        <div id="panelFooterRonevesht" class="col-sm-12 row" style="padding-top: 12px;">
+
+                            <div class="col-sm-2">
+                                <div class="form-group form-float">
+                                    <div class="form-line focused fix">
+                                        <input id="p_SaptDate" class="form-control date" type="text" maxlength="10" readonly>
+                                        <label class="form-label" for="">تاریخ ثبت</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-1">
+                                <div class="form-group form-float">
+                                    <div class="form-line fix">
+                                        <input id="p_RjTime_M" class="form-control int" style="margin-bottom: 0px;" />
+                                        <label class="form-label active">دقیقه</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-1">
+                                <div class="form-group form-float">
+                                    <div class="form-line fix">
+                                        <input id="p_RjTime_H" class="form-control int fix" style="margin-bottom: 0px;" />
+                                        <label class="form-label active">ساعت</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <!--<button  data-bind="text:translate('0')" type="button" id="erja" class="btn btn-primary  pull-left dropdown-toggle" data-toggle="modal" data-target="#modal-Erja" data-backdrop="static" data-keyboard="false"><i class="fa fa-sign-in fa-lg fa-fw"></i>ارجاع</button>-->
+                        <button data-bind="text:translate('ارجاع')" type="button" id="erja" class="btn btn-primary  pull-left"><i class="fa fa-sign-in fa-lg fa-fw"></i></button>
+                        <button data-bind="text:translate('ذخیره')" type="button" id="saveParvandeh" class="btn btn-primary  pull-left" style=" margin-left: 8px;"><i class="fa fa-sign-in fa-lg fa-fw"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        $('#btnazDocDate').MdPersianDateTimePicker({
+            targetTextSelector: '#azDocDate',
+            dateFormat: 'yyyy-MM-dd',
+            Placement: 'bottom', // default is 'bottom'
+            Trigger: 'focus', // default is 'focus',
+            EnableTimePicker: true, // default is true,
+            TargetSelector: '', // default is empty,
+            GroupId: '', // default is empty,
+            ToDate: false, // default is false,
+            FromDate: false, // default is false,
+        });
+
+        $('#btntaDocDate').MdPersianDateTimePicker({
+            targetTextSelector: '#taDocDate',
+            dateFormat: 'yyyy-MM-dd',
+            Placement: 'bottom', // default is 'bottom'
+            Trigger: 'focus', // default is 'focus',
+            EnableTimePicker: true, // default is true,
+            TargetSelector: '', // default is empty,
+            GroupId: '', // default is empty,
+            ToDate: false, // default is false,
+            FromDate: false, // default is false,
+        });
+
+        $('#btnazRjDate').MdPersianDateTimePicker({
+            targetTextSelector: '#azRjDate',
+            dateFormat: 'yyyy-MM-dd',
+            Placement: 'bottom', // default is 'bottom'
+            Trigger: 'focus', // default is 'focus',
+            EnableTimePicker: true, // default is true,
+            TargetSelector: '', // default is empty,
+            GroupId: '', // default is empty,
+            ToDate: false, // default is false,
+            FromDate: false, // default is false,
+        });
+
+
+        $('#btntaRjDate').MdPersianDateTimePicker({
+            targetTextSelector: '#taRjDate',
+            dateFormat: 'yyyy-MM-dd',
+            Placement: 'bottom', // default is 'bottom'
+            Trigger: 'focus', // default is 'focus',
+            EnableTimePicker: true, // default is true,
+            TargetSelector: '', // default is empty,
+            GroupId: '', // default is empty,
+            ToDate: false, // default is false,
+            FromDate: false, // default is false,
+        });
+
+        $('#btnazMhltDate').MdPersianDateTimePicker({
+            targetTextSelector: '#azMhltDate',
+            dateFormat: 'yyyy-MM-dd',
+            Placement: 'bottom', // default is 'bottom'
+            Trigger: 'focus', // default is 'focus',
+            EnableTimePicker: true, // default is true,
+            TargetSelector: '', // default is empty,
+            GroupId: '', // default is empty,
+            ToDate: false, // default is false,
+            FromDate: false, // default is false,
+        });
+
+        $('#btntaMhltDate').MdPersianDateTimePicker({
+            targetTextSelector: '#taMhltDate',
+            dateFormat: 'yyyy-MM-dd',
+            Placement: 'bottom', // default is 'bottom'
+            Trigger: 'focus', // default is 'focus',
+            EnableTimePicker: true, // default is true,
+            TargetSelector: '', // default is empty,
+            GroupId: '', // default is empty,
+            ToDate: false, // default is false,
+            FromDate: false, // default is false,
+        });
+
+        $('#btnRjMhltDate').MdPersianDateTimePicker({
+            targetTextSelector: '#RjMhltDate',
+            dateFormat: 'yyyy-MM-dd',
+            Placement: 'bottom', // default is 'bottom'
+            Trigger: 'focus', // default is 'focus',
+            EnableTimePicker: true, // default is true,
+            TargetSelector: '', // default is empty,
+            GroupId: '', // default is empty,
+            ToDate: false, // default is false,
+            FromDate: false, // default is false,
+        });
+
+        $('#ToUser').val(sessionStorage.userName);
+
+        //'use strict';
+        $(function () {
+            $('.dd').nestable();
+            $('.dd').on('change', function () {
+                var $this = $(this);
+                var serializedData = window.JSON.stringify($($this).nestable('serialize'));
+                $this.parents('div.body').find('textarea').val(serializedData);
+            });
+        });
+    </script>
+    <script src="~/Content/new/js/form.min.js"></script>
+    <script src="~/Content/new/js/advanced-form-elements.js"></script>
+    <script src="~/Content/new/js/jszip.min.js"></script>
+    <script src="~/Scripts/Erja.js?dt=@(TiketKarbord.Controllers.Unit.UnitPublic.titleVerNumber)"></script>
+}
+
+
+
+
+
