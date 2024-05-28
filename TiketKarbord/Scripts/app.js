@@ -22,7 +22,7 @@ $("input.int").keydown(function (e) {
                 (e.keyCode == 39) ||
                 // SHIFT + INS
                 (e.keyCode == 45))) {
-                e.preventDefault();
+                e.preventDefault(); 
             }
         }
 
