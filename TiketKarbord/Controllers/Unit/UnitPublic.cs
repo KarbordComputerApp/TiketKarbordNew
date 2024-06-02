@@ -5,12 +5,9 @@ namespace TiketKarbord.Controllers.Unit
     public class UnitPublic
     {
        public static string titleVer = "ورژن تست";
-       public static string titleVerNumber = "3";
+       public static string titleVerNumber = "4";
 
-        //public static string titleVer = "ورژن"; 
-        //public static string titleVerNumber = "1001";
-
-    
-
+      //public static string titleVer = "ورژن"; 
+      //public static string titleVerNumber = "1001";
     }
 }

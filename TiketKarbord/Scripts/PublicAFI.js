@@ -6,6 +6,7 @@ var userName = localStorage.getItem('userNameTiket');
 //var pass = localStorage.getItem('password');
 
 var dateNow;
+var activeAction = true;
 
 var key_F1 = 112;
 var key_F2 = 113;

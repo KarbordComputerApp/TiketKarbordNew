@@ -31,29 +31,31 @@
 
                     <div class="card" style="margin:15px 5px 15px 5px" data-bind="style:{ 'background-color' : DocRead == 0 ? 'white' : '#fff3e9' }">
 
-                        <div class="card-body">
+                        <div class="card-body" style="padding-top: 0px;padding-left: 0px;padding-right: 0px;">
 
-                            <div class="card-title">
-                                <h5 style="padding-left:15px"><span data-bind="text: CustName"></span></h5>
+                            <div class="card-title" style="margin-bottom: 2px;">
+                                <p id="modeChat" class="card-title-erja" data-bind="style:{ 'background-color' :  ChatMode == 1 ? '#cf50d3' : ChatMode == 1 && ChatActive == true ? '#4bff32' : ChatFinish == true ? 'red' : '#e87f22' }">
+                                    <span data-bind="text: ChatMode == 1 ? 'درخواست چت' : ChatMode == 1 && ChatActive == true ? 'چت فعال' : ChatFinish == true ? 'پایان چت' : 'تیکت' "></span>
+                                </p>
                             </div>
 
-                            <div class="card-text">
+                            <div class="card-text" style="padding:0px 10px 0px 10px">
+                                <p style="padding-left:15px"> <span>مشتری :</span> <span data-bind="text: CustName"></span></p>
+                                <p style="padding-left:15px"> <span>وضعیت تیکت :</span> <span data-bind="text:StatusTiket "></span></p>
                                 <div class="row">
                                     <p style="padding-left:15px"> <span>شماره :</span> <span data-bind="text: DocNo"></span></p>
                                     <p style="padding-left:15px"> <span>شماره قفل :</span> <span data-bind="text: LockNo"></span></p>
                                     <p style="padding-left:15px"> <span>تاریخ :</span> <span data-bind="text: DocDate"></span></p>
                                 </div>
-                                <div class="row">
-                                    <p style="padding-left:15px"> <span>درخواست کننده :</span> <span data-bind="text: Motaghazi"></span></p>
-                                </div>
+                                <p style="padding-left:15px"> <span>درخواست کننده :</span> <span data-bind="text: Motaghazi"></span></p>
+                                <p><span>توضیحات :</span> <span data-bind="text: Text"></span></p>
+                                <p><span>نتیجه :</span> <span data-bind="text: ResultSt"></span></p>
 
+                                <a data-bind="click: $root.UpdateTiket" class="btn btn-primary pull-left">ارجاع</a>
                             </div>
 
 
-                            <p><span>توضیحات :</span> <span data-bind="text: Text"></span></p>
-                            <p><span>نتیجه :</span> <span data-bind="text: ResultSt"></span></p>
 
-                            <a data-bind="click: $root.UpdateTiket" class="btn btn-primary pull-left">ارجاع</a>
                         </div>
                     </div>
 

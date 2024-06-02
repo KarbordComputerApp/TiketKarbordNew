@@ -9,6 +9,9 @@
     var ErjDocXErjaUri = server + '/api/KarbordData/Web_ErjDocXErja/'; // آدرس ریز ارجاعات
     var ErjSaveTicket_BSaveUri = server + '/api/KarbordData/ErjSaveTicket_BSave/'; //آدرس ذخیره ارجاع
 
+    if (activeAction == false) {
+        $("#P_Action").hide();
+    }
 
     self.DocXB_LastList = ko.observableArray([]); // لیست گزارش  
     self.ErjXResultList = ko.observableArray([]); // لیست نتیجه 

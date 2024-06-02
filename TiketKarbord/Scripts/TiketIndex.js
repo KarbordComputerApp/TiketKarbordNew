@@ -14,6 +14,10 @@
 
     var showHideResult = false;
 
+    if (activeAction == false) {
+        $("#P_Action").hide();
+    }
+
     function getErjDocXH(log) {
         var ErjDocXHObject = {
             UserCode: userName,
