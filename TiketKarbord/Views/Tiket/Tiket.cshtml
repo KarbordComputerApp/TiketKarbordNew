@@ -27,13 +27,8 @@
 
 
                 <div data-bind="foreach: DocXB_LastList" data-dismiss="modal" style="cursor: default;">
-                    <div class="card" style="margin:15px 5px 15px 5px" data-bind="style:{ 'background-color' :  'white' }">
+                    <div class="card" style="margin:15px 5px 15px 5px" data-bind="style:{ 'background-color' : RjReadSt == 'F' ? 'white' : '#fff3e9'}">
                         <div class="card-body">
-
-                            <!-- <div class="card-title">
-                                 <h5 style="padding-left:15px"><span data-bind="text: CustName"></span></h5>
-                             </div>-->
-
                             <div class="card-text">
                                 <div class="row">
                                     <p style="padding-left:15px"> <span>شماره :</span> <span data-bind="text: DocNo"></span></p>

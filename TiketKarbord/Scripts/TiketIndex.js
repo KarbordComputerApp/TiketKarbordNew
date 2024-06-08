@@ -93,6 +93,7 @@
 
     var serialTiket;
     var lockNoTiket;
+    var chatMode = 0;
     self.UpdateTiket = function (item) {
         $('#OpenChat').hide();
         serialTiket = item["SerialNumber"];
@@ -106,6 +107,7 @@
         $('#p_Status').val(item["Status"]);
         $('#p_Spec').val(item["Spec"]);
         $('#Result').val(item["Text"]);
+        chatMode = item["ChatMode"];
         $('#ActiveChat').prop('checked', item["ChatActive"]);
         if (item["ChatActive"] == true) {
             $('#OpenChat').show();
@@ -225,7 +227,7 @@
             IP: ipw,
             CallProg: 'Web', 
             LoginLink: false,
-            ChatMode: 0,
+            ChatMode: chatMode,
             ChatActive: p_ActiveChat
         }
 

@@ -34,8 +34,8 @@
                         <div class="card-body" style="padding-top: 0px;padding-left: 0px;padding-right: 0px;">
 
                             <div class="card-title" style="margin-bottom: 2px;">
-                                <p id="modeChat" class="card-title-erja" data-bind="style:{ 'background-color' :  ChatMode == 1 ? '#cf50d3' : ChatMode == 1 && ChatActive == true ? '#4bff32' : ChatFinish == true ? 'red' : '#e87f22' }">
-                                    <span data-bind="text: ChatMode == 1 ? 'درخواست چت' : ChatMode == 1 && ChatActive == true ? 'چت فعال' : ChatFinish == true ? 'پایان چت' : 'تیکت' "></span>
+                                <p id="modeChat" class="card-title-erja" data-bind="style:{ 'background-color' :  ChatMode == 1 && ChatActive == true ? '#4bff32' : ChatMode == 1 ? '#cf50d3' : ChatFinish == true ? 'red' : '#e87f22' }">
+                                    <span data-bind="text: ChatMode == 1 && ChatActive == true ? 'چت فعال' : ChatMode == 1 ? 'درخواست چت' : ChatFinish == true ? 'پایان چت' : 'تیکت' "></span>
                                 </p>
                             </div>
 
