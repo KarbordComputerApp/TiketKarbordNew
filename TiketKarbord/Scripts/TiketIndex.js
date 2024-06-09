@@ -9,6 +9,7 @@
     var ErjUsersUri = server + '/api/KarbordData/Web_ErjUsers/'; // آدرس کاربران زمان ارجاع
     var ErjDocXErjaUri = server + '/api/KarbordData/Web_ErjDocXErja/'; // آدرس ریز ارجاعات
     var ErjSaveTicket_BSaveUri = server + '/api/KarbordData/ErjSaveTicket_BSave/'; //آدرس ذخیره ارجاع
+    var ErjSaveTicket_DocReadUri = server + '/api/KarbordData/ErjSaveTicket_DocRead/'; //آدرس دیده شدن تیکت
 
     var ChatCountTiketUri = server + '/api/Data/ChatCountTiket/';
 
@@ -114,6 +115,7 @@
         }
         getErjUsersList(serialTiket);
         getErjDocXErja(serialTiket);
+        ReadTiket(serialTiket);
         $('#modal-DocXK').modal('show');
     }
 
@@ -130,6 +132,10 @@
 
     $("#modal-DocXK").on('shown.bs.modal', function () {
         showHideResult = false;
+    })
+
+    $("#modal-DocXK").on('hidden.bs.modal', function () {
+        getErjDocXH(false);
     })
 
     self.currentPageIndexErjDocXH = ko.observable(0);
@@ -225,14 +231,14 @@
             F20: '',
             Motaghazi: p_Motaghazi,
             IP: ipw,
-            CallProg: 'Web', 
+            CallProg: 'Web',
             LoginLink: false,
             ChatMode: chatMode,
             ChatActive: p_ActiveChat
         }
 
         ajaxFunction(ErjSaveTicketUri, 'POST', ErjSaveTicket_HI).done(function (data) {
-            getErjDocXH(false);
+            //getErjDocXH(false);
             $('#modal-DocXK').modal('hide');
         });
     }
@@ -332,7 +338,7 @@
         ajaxFunction(ErjSaveTicket_BSaveUri, 'POST', ErjSaveTicket_BSaveObject).done(function (response) {
             $('#modal-Erja').modal('hide');
             $('#modal-DocXK').modal('hide');
-            getErjDocXH(false);
+            //getErjDocXH(false);
         });
 
     }
@@ -515,6 +521,18 @@
         var res = comm.replaceAll("\r\n", '<br>');
         return '<p>' + res + '</p>';
     }
+
+    function ReadTiket(serial) {
+        DocReadObject = {
+            SerialNumber: serial,
+            DocReadSt: "F",
+        };
+        ajaxFunction(ErjSaveTicket_DocReadUri, 'POST', DocReadObject).done(function (response) {
+            
+        });
+    }
+
+
 
 };
 

@@ -8,6 +8,7 @@
     var ErjUsersUri = server + '/api/KarbordData/Web_ErjUsers/'; // آدرس کاربران زمان ارجاع
     var ErjDocXErjaUri = server + '/api/KarbordData/Web_ErjDocXErja/'; // آدرس ریز ارجاعات
     var ErjSaveTicket_BSaveUri = server + '/api/KarbordData/ErjSaveTicket_BSave/'; //آدرس ذخیره ارجاع
+    var ErjSaveTicket_DocReadUri = server + '/api/KarbordData/ErjSaveTicket_DocRead/'; //آدرس دیده شدن تیکت
 
     if (activeAction == false) {
         $("#P_Action").hide();
@@ -176,7 +177,7 @@
             getErjUsersList(serialTiket);
             getErjDocXErja(serialTiket);
             getErjXResultList(serialTiket, null, null, null)
-
+            ReadTiket(serialTiket);
             $('#modal-ErjDocTiket').modal('show');
         });
     }
@@ -395,7 +396,7 @@
         ajaxFunction(ErjSaveTicket_BSaveUri, 'POST', ErjSaveTicket_BSaveObject).done(function (response) {
             $('#modal-Erja').modal('hide');
             $('#modal-ErjDocTiket').modal('hide');
-            getDocXB_Last();
+            //getDocXB_Last();
         });
 
     }
@@ -409,6 +410,23 @@
     $('#Close_ModalErj').click(function () {
         $('#modal-Erja').modal('hide');
     })
+
+    $("#modal-ErjDocTiket").on('hidden.bs.modal', function () {
+        lockNoTiket = 0;
+        getDocXB_Last();
+    })
+
+    function ReadTiket(serial) {
+        DocReadObject = {
+            SerialNumber: serial,
+            DocReadSt: "F",
+        };
+        ajaxFunction(ErjSaveTicket_DocReadUri, 'POST', DocReadObject).done(function (response) {
+
+        });
+    }
+
+
 
 };
 
