@@ -69,6 +69,7 @@
                     localStorage.setItem("userNameTiket", user);
                     localStorage.setItem('passwordTiket', pass);
                     getIP();
+                    getAccessUser();
                     localStorage.removeItem('ErjUsers');
                     window.location.href = localStorage.getItem("urlIndex");
                 }

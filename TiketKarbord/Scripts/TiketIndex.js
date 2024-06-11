@@ -19,6 +19,9 @@
         $("#P_Action").hide();
     }
 
+    localStorage.getItem("CHG_DOCX_SERVICE") == "true" ? $("#saveDocXK").show() : $("#saveDocXK").hide(); 
+
+
     function getErjDocXH(log) {
         var ErjDocXHObject = {
             UserCode: userName,
@@ -29,6 +32,7 @@
             LoginLink: false,
             top: null,
             Status: "فعال",
+            ChatMode : 1
         }
 
         ajaxFunction(ErjDocXHUri, 'Post', ErjDocXHObject).done(function (dataDocXK) {

@@ -793,6 +793,7 @@
     <Content Include="Content\new\js\fa.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\Dayjob.js" />
     <Content Include="Scripts\Tiket.js" />
     <Content Include="Scripts\Erja.js" />
     <Content Include="Scripts\HomeIndex.js" />
@@ -818,6 +819,7 @@
     <Content Include="Views\Erj\Index.cshtml" />
     <Content Include="Views\Erj\Erja.cshtml" />
     <Content Include="Views\Tiket\Tiket.cshtml" />
+    <Content Include="Views\Erj\Dayjob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

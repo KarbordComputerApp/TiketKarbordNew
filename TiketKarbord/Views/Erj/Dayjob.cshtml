@@ -1,0 +1,118 @@
+﻿@using TiketKarbord.Controllers.Unit;
+@{
+    ViewBag.Title = "لیست گزارش کارها";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <div class="form-inline focused">
+                    <strong style="margin-left: 5px; margin-right: 5px;font-size: 15px;">لیست گزارش کارها</strong>
+                    <div id="buttom-header-dropdown" class="row header-dropdown m-r--5">
+                        <a id="refreshErjDayRH" class="">
+                            <img data-bind="attr: {title:text_Refresh}" src="~/Content/img/list/streamline-icon-synchronize-arrows-1@48x48.png" width="20" height="20" style="margin-left: 10px;" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="body">
+
+                <div data-bind="foreach: ErjDayRHList">
+
+                    <div class="card" style="margin:15px 5px 15px 5px" data-bind="">
+
+                        <div class="card-body">
+
+                            <div class="card-title">
+                                <h5 style="padding-left:15px"><span data-bind="text: EghdamName"></span></h5>
+                            </div>
+
+                            <div class="card-text">
+                                <div class="row">
+                                    <p style="padding-left:15px"> <span>شماره :</span> <span data-bind="text: DocNo"></span></p>
+                                    <p style="padding-left:15px"> <span>تاریخ :</span> <span data-bind="text: DocDate"></span></p>
+                                </div>
+                            </div>
+
+
+                            <p><span>ملاحظات :</span> <span data-bind="text: Spec "></span></p>
+                            <p><span>وضعیت :</span> <span data-bind="text: Status "></span></p>
+
+                            <a data-bind="click: $root.ViewErjDayRH" class="btn btn-primary pull-left">نمایش</a>
+                            <!-- <a data-bind="click: $root.DeleteDocH" class="btn pull-left" style="margin-left: 10px;background-color: red;">حذف</a>-->
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modal-ErjDayRB" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-entesab">
+        <div class="modal-content">
+            <div class="modal-header" style="    padding-bottom: 0px;    padding-top: 0px;">
+                <a id="Close_ModalErjDayRB" data-bind="attr: {title:text_Close}">
+                    <span aria-hidden="true" style="font-size:20px">&times;</span>
+                </a>
+                <h4 class="modal-title">نمایش گزارش کار</h4>
+                <div></div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md col-sm">
+                        <div style="height:500px;overflow:auto;border: 1px #ddd solid;border-radius: 20px;">
+
+
+                            <div data-bind="foreach: ErjDayRBList">
+                                <div class="card" style="margin:15px 5px 15px 5px; min-height:80px" data-bind="">
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <div class="row">
+                                                <h5 style="padding-left:15px"><span data-bind="text: CustName "></span></h5>
+                                                <h5 style="position:absolute; left:10px"><span data-bind="text: $root.CovertTime(Karkard) "></span></h5>
+                                            </div>
+                                           
+                                        </div>
+
+                                        <div class="card-text">
+                                            <p><span>شرح :</span> <span data-bind="text: Comm "></span></p>
+                                            <div class="row">
+                                                <!--<p style="padding-left:15px"> <span>ردیف :</span> <span data-bind="text: BandNo"></span></p>-->
+                                            </div>
+                                        </div>
+
+                                       
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+    </script>
+    <script src="~/Scripts/Dayjob.js?dt=@(TiketKarbord.Controllers.Unit.UnitPublic.titleVerNumber)0"></script>
+}
+

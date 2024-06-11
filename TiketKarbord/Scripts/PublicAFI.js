@@ -2,7 +2,7 @@
 var server = "http://localhost:52798/";
 //var server = 'http://192.168.0.106:1000/';  
 
-var userName = localStorage.getItem('userNameTiket'); 
+var userName = localStorage.getItem('userNameTiket');
 //var pass = localStorage.getItem('password');
 
 var dateNow;
@@ -19,7 +19,7 @@ var key_F8 = 119;
 var key_F9 = 120;
 var key_F10 = 121;
 var key_F11 = 122;
-var key_F12 = 123; 
+var key_F12 = 123;
 
 var key_Space = 32;
 var key_BackSpace = 8;
@@ -349,11 +349,14 @@ function getIP() {
     sessionStorage.IPW = "Error Get IP";
     ipw = "Error Get IP";
 
-    ajaxFunctionAccount('http://ip-api.com/json/', 'GET',true).done(function (data) {
+    ajaxFunctionAccount('http://ip-api.com/json/', 'GET', true).done(function (data) {
         localStorage.setItem("IPW", data.query);
         ipw = data.query;
     });
 }
+
+
+
 
 
 function CountPage(list, pageSize, item) {
@@ -411,3 +414,126 @@ function ConvertComm(comm) {
     var res = comm.replaceAll("\r\n", '<br>');
     return '<p>' + res + '</p>';
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var AccessUri = server + '/api/KarbordData/AccessUser/'; // آدرس سطح دسترسی
+var accessErj;
+AccessList = ko.observableArray([]); // سطح دسترسی
+
+
+function getAccessUser() {
+    ajaxFunction(AccessUri + userName, 'Get', true).done(function (data) {
+
+        self.AccessList(data);
+        admin = data.filter(s => s.TrsName == 'ADMIN');
+        admin_Erj1 = 0
+        for (var i = 0; i < admin.length; i++) {
+            if (admin[i].OrgProgName == 'Erj1') admin_Erj1 = 1;
+        }
+        localStorage.setItem('admin_Erj1', admin_Erj1);
+
+        if (self.AccessList().length > 0) {
+            localStorage.setItem('AccessErj', JSON.stringify(data));
+            SetValidationErj(data);
+        }
+    })
+}
+
+function SetValidationErj(data) {
+    accessErj = data;
+    var ShowMenuErj = [false, false];
+    if (accessErj == null) return false;
+    if (accessErj.length == 0) return false;
+
+    if (userName.toUpperCase() == 'ACE')
+        accessErj[0].TrsName = 'ADMIN';
+
+    // ErjDoc  NEW_ErjDOC  CHG_ErjDOC  DEL_ErjDOC  OTHERUSER_ErjDOC
+    validation = CheckAccessErj('ErjDoc');
+    validation == true ? localStorage.setItem("ErjDoc", "true") : localStorage.setItem("ErjDoc", "false")
+
+    validation = CheckAccessErj('NEW_ErjDOC');
+    validation == true ? localStorage.setItem("NEW_ErjDOC", "true") : localStorage.setItem("NEW_ErjDOC", "false")
+
+    validation = CheckAccessErj('CHG_ErjDOC');
+    validation == true ? localStorage.setItem("CHG_ErjDOC", "true") : localStorage.setItem("CHG_ErjDOC", "false")
+
+    validation = CheckAccessErj('DEL_ErjDOC');
+    validation == true ? localStorage.setItem("DEL_ErjDOC", "true") : localStorage.setItem("DEL_ErjDOC", "false")
+
+    validation = CheckAccessErj('OTHERUSER_ErjDOC');
+    validation == true ? localStorage.setItem("AccessSanadErj", "true") : localStorage.setItem("AccessSanadErj", "false")
+
+
+
+    //NEW_DAYR CHG_DAYR DEL_DAYR PRN_DAYR
+    validation = CheckAccessErj('DAYR');
+    validation == true ? localStorage.setItem("DAYR", "true") : localStorage.setItem("DAYR", "false")
+
+    validation = CheckAccessErj('NEW_DAYR');
+    validation == true ? localStorage.setItem("NEW_DAYR", "true") : localStorage.setItem("NEW_DAYR", "false")
+
+    validation = CheckAccessErj('CHG_DAYR');
+    validation == true ? localStorage.setItem("CHG_DAYR", "true") : localStorage.setItem("CHG_DAYR", "false")
+
+    validation = CheckAccessErj('DEL_DAYR'); 
+    validation == true ? localStorage.setItem("DEL_DAYR", "true") : localStorage.setItem("DEL_DAYR", "false")
+
+    validation = CheckAccessErj('PRN_DAYR');
+    validation == true ? localStorage.setItem("PRN_DAYR", "true") : localStorage.setItem("PRN_DAYR", "false")
+
+
+
+
+    //NEW_DOCX_SERVICE CHG_DOCX_SERVICE   DEL_DOCX_SERVICE  PRN_DOCX_SERVICE  OTHERUSER_DOCX_SERVICE
+    validation = CheckAccessErj('DOCX_SERVICE');
+    validation == true ? localStorage.setItem("DOCX_SERVICE", "true") : localStorage.setItem("DOCX_SERVICE", "false")
+
+    validation = CheckAccessErj('NEW_DOCX_SERVICE');
+    validation == true ? localStorage.setItem("NEW_DOCX_SERVICE", "true") : localStorage.setItem("NEW_DOCX_SERVICE", "false")
+
+    validation = CheckAccessErj('CHG_DOCX_SERVICE');
+    validation == true ? localStorage.setItem("CHG_DOCX_SERVICE", "true") : localStorage.setItem("CHG_DOCX_SERVICE", "false")
+
+    validation = CheckAccessErj('DEL_DOCX_SERVICE'); 
+    validation == true ? localStorage.setItem("DEL_DOCX_SERVICE", "true") : localStorage.setItem("DEL_DOCX_SERVICE", "false")
+
+    validation = CheckAccessErj('PRN_DOCX_SERVICE');
+    validation == true ? localStorage.setItem("PRN_DOCX_SERVICE", "true") : localStorage.setItem("PRN_DOCX_SERVICE", "false")
+
+    validation = CheckAccessErj('OTHERUSER_DOCX_SERVICE');
+    validation == true ? localStorage.setItem("OTHERUSER_DOCX_SERVICE", "true") : localStorage.setItem("OTHERUSER_DOCX_SERVICE", "false")
+
+}
+
+
+function CheckAccessErj(TrsName) {
+    if (localStorage.getItem('admin_Erj1') == '1')
+        return true;
+    else {
+        for (var i = 0; i < accessErj.length; i++) {
+            if (accessErj[i].TrsName == TrsName)
+                return true;
+        }
+    }
+    return false
+}
+
+
+localStorage.getItem("ErjDoc") == "true" ? $("#ErjDOC").show() : $("#ErjDOC").hide();  
+localStorage.getItem("DAYR") == "true" ? $("#Dayjob").show() : $("#Dayjob").hide();  
+localStorage.getItem("DOCX_SERVICE") == "true" ? $("#TiketDOC").show() : $("#TiketDOC").hide();  
+
