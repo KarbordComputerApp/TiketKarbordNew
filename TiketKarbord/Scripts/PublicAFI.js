@@ -435,7 +435,7 @@ AccessList = ko.observableArray([]); // سطح دسترسی
 
 
 function getAccessUser() {
-    ajaxFunction(AccessUri + userName, 'Get', true).done(function (data) {
+    ajaxFunction(AccessUri + 'Web2/' + userName, 'Get', true).done(function (data) {
 
         self.AccessList(data);
         admin = data.filter(s => s.TrsName == 'ADMIN');
