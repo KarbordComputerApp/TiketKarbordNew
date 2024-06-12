@@ -435,6 +435,8 @@ AccessList = ko.observableArray([]); // سطح دسترسی
 
 
 function getAccessUser() {
+
+    userName = localStorage.getItem('userNameTiket');
     ajaxFunction(AccessUri + 'Web2/' + userName, 'Get', true).done(function (data) {
 
         self.AccessList(data);
