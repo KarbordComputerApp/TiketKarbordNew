@@ -5,6 +5,8 @@
     var DocKUri = server + '/api/KarbordData/ErjDocK/'; // آدرس گزارش پرونده
     var ErjResultUri = server + '/api/KarbordData/ErjResult/'; // آدرس نتیجه
     var ErjDocErjaUri = server + '/api/KarbordData/ErjDocErja/'; // آدرس  ارجاع
+    var ErjSaveDoc_RjRead_Uri = server + '/api/KarbordData/ErjSaveDoc_RjRead/'; // آدرس ذخیره دیدن ارجاع
+
 
     self.DocB_LastList = ko.observableArray([]); // لیست گزارش  
     self.ErjResultList = ko.observableArray([]); // لیست نتیجه 
@@ -292,7 +294,7 @@
                 RjReadSt: 'F'
             };
 
-            ajaxFunction(ErjSaveDoc_RjRead_Uri + aceErj + '/' + salErj + '/' + group, 'POST', ErjSaveDoc_RjRead_Object).done(function (response) {
+            ajaxFunction(ErjSaveDoc_RjRead_Uri, 'POST', ErjSaveDoc_RjRead_Object).done(function (response) {
                 //AlertErja();
             });
         }

@@ -32,7 +32,7 @@
 
 
                 <div data-bind="foreach: DocB_LastList" data-dismiss="modal" style="cursor: default;">
-                    <div class="card" style="margin:15px 5px 15px 5px" data-bind="style:{ 'background-color' :  'white' }">
+                    <div class="card" style="margin:15px 5px 15px 5px" data-bind="style:{'background-color': RjReadSt == 'T'  ? '#fff3e9' : 'white' }">
                         <div class="card-body">
 
                             <div class="card-title">
@@ -42,7 +42,7 @@
                             <div class="card-text">
                                 <div class="row">
                                     <p style="padding-left:15px"> <span>شماره :</span> <span data-bind="text: DocNo"></span></p>
-                                    <p style="padding-left:15px"> <span>تاریخ :</span> <span data-bind="text: DocDate"></span></p>
+                                    <p style="padding-left:15px"> <span>تاریخ ارجاع :</span> <span data-bind="text: RjDate"></span></p>
                                 </div>
                             </div>
                             <p><span>ملاحظات :</span> <span data-bind="text: Spec "></span></p>

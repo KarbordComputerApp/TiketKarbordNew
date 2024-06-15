@@ -483,6 +483,11 @@ function SetValidationErj(data) {
 
     //NEW_DAYR CHG_DAYR DEL_DAYR PRN_DAYR
     validation = CheckAccessErj('DAYR');
+    validation = false
+
+    if (userName.toUpperCase() == "ACE" || userName.toUpperCase() == "HRH" || userName.toUpperCase() == "AFSHAR")
+        validation = true
+        
     validation == true ? localStorage.setItem("DAYR", "true") : localStorage.setItem("DAYR", "false")
 
     validation = CheckAccessErj('NEW_DAYR');
