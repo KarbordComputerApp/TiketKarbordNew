@@ -487,7 +487,7 @@ function SetValidationErj(data) {
 
     if (userName.toUpperCase() == "ACE" || userName.toUpperCase() == "HRH" || userName.toUpperCase() == "AFSHAR")
         validation = true
-        
+
     validation == true ? localStorage.setItem("DAYR", "true") : localStorage.setItem("DAYR", "false")
 
     validation = CheckAccessErj('NEW_DAYR');
@@ -496,7 +496,7 @@ function SetValidationErj(data) {
     validation = CheckAccessErj('CHG_DAYR');
     validation == true ? localStorage.setItem("CHG_DAYR", "true") : localStorage.setItem("CHG_DAYR", "false")
 
-    validation = CheckAccessErj('DEL_DAYR'); 
+    validation = CheckAccessErj('DEL_DAYR');
     validation == true ? localStorage.setItem("DEL_DAYR", "true") : localStorage.setItem("DEL_DAYR", "false")
 
     validation = CheckAccessErj('PRN_DAYR');
@@ -515,7 +515,7 @@ function SetValidationErj(data) {
     validation = CheckAccessErj('CHG_DOCX_SERVICE');
     validation == true ? localStorage.setItem("CHG_DOCX_SERVICE", "true") : localStorage.setItem("CHG_DOCX_SERVICE", "false")
 
-    validation = CheckAccessErj('DEL_DOCX_SERVICE'); 
+    validation = CheckAccessErj('DEL_DOCX_SERVICE');
     validation == true ? localStorage.setItem("DEL_DOCX_SERVICE", "true") : localStorage.setItem("DEL_DOCX_SERVICE", "false")
 
     validation = CheckAccessErj('PRN_DOCX_SERVICE');
@@ -540,7 +540,17 @@ function CheckAccessErj(TrsName) {
 }
 
 
-localStorage.getItem("ErjDoc") == "true" ? $("#ErjDOC").show() : $("#ErjDOC").hide();  
-localStorage.getItem("DAYR") == "true" ? $("#Dayjob").show() : $("#Dayjob").hide();  
-localStorage.getItem("DOCX_SERVICE") == "true" ? $("#TiketDOC").show() : $("#TiketDOC").hide();  
+$('#LogOut').click(function () {
+    LogOut();
+})
+
+
+function LogOut() {
+    window.location.href = localStorage.getItem("urlLogin");
+}
+
+
+localStorage.getItem("ErjDoc") == "true" ? $("#ErjDOC").show() : $("#ErjDOC").hide();
+localStorage.getItem("DAYR") == "true" ? $("#Dayjob").show() : $("#Dayjob").hide();
+localStorage.getItem("DOCX_SERVICE") == "true" ? $("#TiketDOC").show() : $("#TiketDOC").hide();
 

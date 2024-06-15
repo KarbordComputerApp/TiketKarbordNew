@@ -70,6 +70,7 @@
 
         ajaxFunction(ErjDocHUri, 'Post', ErjDocHObject).done(function (data) {
             self.ErjDocHList(data);
+            $("#CountList").text(data.length);
         });
     }
 

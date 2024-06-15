@@ -66,7 +66,7 @@
                 }
 
             });
-
+            $("#CountList").text(dataDocXK.length);
             self.ErjDocXHList(dataDocXK);
         });
     }

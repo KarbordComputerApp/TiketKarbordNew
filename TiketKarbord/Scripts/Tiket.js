@@ -58,6 +58,7 @@
         };
         ajaxFunction(ErjDocXB_LastUri, 'POST', DocXB_LastObject, false).done(function (response) {
             self.DocXB_LastList(response);
+            $("#CountList").text(response.length);
         });
     }
 
@@ -67,7 +68,7 @@
     $('#refreshTiket').click(function () {
         Swal.fire({
             title: mes_Refresh,
-            text: translate("لیست ارجاعات") + " " + translate("به روز رسانی شود ؟"),
+            text: translate("لیست تیکت ها") + " " + translate("به روز رسانی شود ؟"),
             type: 'info',
             showCancelButton: true,
             cancelButtonColor: '#3085d6',

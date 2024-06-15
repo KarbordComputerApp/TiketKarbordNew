@@ -80,6 +80,7 @@
         };
         ajaxFunction(ErjDocB_LastUri, 'POST', DocB_LastObject, false).done(function (response) {
             self.DocB_LastList(response);
+            $("#CountList").text(response.length);
         });
     }
 

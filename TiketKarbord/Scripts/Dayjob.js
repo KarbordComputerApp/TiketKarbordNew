@@ -20,6 +20,7 @@
         };
         ajaxFunction(ErjDayRHUri, 'POST', ErjDayRHObject, false).done(function (response) {
             self.ErjDayRHList(response);
+            $("#CountList").text(response.length);
         });
     }
 
