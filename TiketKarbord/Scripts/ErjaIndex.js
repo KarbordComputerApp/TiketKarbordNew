@@ -409,7 +409,7 @@
 
         Swal.fire({
             title: 'تایید به روز رسانی',
-            text: "لیست تیکت ها به روز رسانی شود ؟",
+            text: "لیست پرونده ها به روز رسانی شود ؟",
             type: 'info',
             showCancelButton: true,
             cancelButtonColor: '#3085d6',
