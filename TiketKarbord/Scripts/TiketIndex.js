@@ -325,6 +325,8 @@
             return showNotification(translate('متن ارجاع را وارد کنید'), 0);
         }
 
+        SaveDocXK();
+
         ErjSaveTicket_BSaveObject = {
             SerialNumber: serialTiket,
             Natijeh: natijeh,

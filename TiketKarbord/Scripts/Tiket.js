@@ -18,7 +18,7 @@
     self.ErjXResultList = ko.observableArray([]); // لیست نتیجه 
     self.ErjDocTiket = ko.observableArray([]); // لیست پرونده  
 
-    var serialTiket = 0; 
+    var serialTiket = 0;
     var lockNoTiket = 0;
     var TiketMode = sessionStorage.ModeCodeTiket;
 
@@ -174,11 +174,14 @@
             if (item["ChatActive"] == true) {
                 $('#OpenChat').show();
             }
-            lockNoTiket = item["LockNo"]; 
+            lockNoTiket = item["LockNo"];
             getErjUsersList(serialTiket);
             getErjDocXErja(serialTiket);
             getErjXResultList(serialTiket, null, null, null)
-            ReadTiket(serialTiket);
+            if (TiketMode == "1" && Band.RjReadSt == "T") {
+                ReadTiket(serialTiket);
+            }
+
             $('#modal-ErjDocTiket').modal('show');
         });
     }
@@ -327,6 +330,11 @@
             }
             lastUserErjCode = listBand[0].FromUserCode;
             lastUserErjName = listBand[0].FromUserName;
+
+            if (TiketMode != "1") {
+                $('#Result').val(listBand[0].RjComm);
+            }
+
         }
         else {
             $("#P_BodyErjDocXErja").hide();

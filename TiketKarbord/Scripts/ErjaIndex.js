@@ -65,7 +65,7 @@
             Status: "",
             DocNo: "",
             Sort: null,
-            ModeSort: "DESC"
+            ModeSort: ""
         };
 
         ajaxFunction(ErjDocHUri, 'Post', ErjDocHObject).done(function (data) {
@@ -505,7 +505,23 @@
 
 
 
+    function getDocAttachList(serial) {
+        var DocAttachObject = {
+            ProgName: 'ERJ1',
+            ModeCode: '102',
+            //Group: group_Tiket,
+            Year: '0000',
+            SerialNumber: serial,
+            BandNo: 0,
+            ByData: 0,
+            IP: ipw,
+            CallProg: 'Web'
+        }
 
+        ajaxFunction(DocAttachUri, 'POST', DocAttachObject).done(function (data) {
+            self.DocAttachList(data);
+        });
+    }
 
   
 
@@ -526,6 +542,11 @@
 
 
     getMahramanehList();*/
+
+
+
+
+
 
 
 

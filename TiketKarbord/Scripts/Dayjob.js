@@ -13,7 +13,7 @@
         var ErjDayRHObject = {
             Mode: 0,
             UserCode: userName ,
-            Status: '',
+            Status: 'فعال',
             DocDate: '',
             Eghdam: '',
             Tanzim: '',
