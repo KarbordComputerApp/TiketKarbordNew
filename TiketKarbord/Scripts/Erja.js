@@ -430,16 +430,20 @@
                     + '</div>'
 
                 $('#BodyErjDocH').append(textBody);
+               
             }
             if (i > 0)
                 bandNo = i
             else
                 bandNo = 1;
         }
+
     }
 
-
-
+    $("#modal-ErjDocErja").on('shown.bs.modal', function () {
+        var element = document.getElementById("BodyErjDocH");
+        element.scrollTop = element.scrollHeight;
+    });
 
     $('#ShowHideInformation').click(function () {
         if (showHideInformation) {
@@ -549,6 +553,92 @@
         $('#commPublic').val($('#Result').val());
         $('#modal-Comm').modal('show');
     });
+
+
+
+    var DocAttachUri = server + '/api/KarbordData/DocAttach/'; // آدرس لیست پیوست 
+    self.DocAttachList = ko.observableArray([]); // ليست پیوست
+    self.AddAttachList = ko.observableArray([]);
+
+    function getDocAttachList(serial) {
+        var DocAttachObject = {
+            ProgName: 'ERJ1',
+            ModeCode: '102',
+            Year: '0000',
+            SerialNumber: serial,
+            BandNo: 0,
+            ByData: 0,
+            IP: ipw,
+            CallProg: 'Web'
+        }
+
+        ajaxFunction(DocAttachUri, 'POST', DocAttachObject).done(function (data) {
+            self.DocAttachList(data);
+        });
+    }
+
+
+    $('#refreshDocAttach').click(function () {
+        Swal.fire({
+            title: 'تایید به روز رسانی',
+            text: "پیوست ها به روز رسانی شود ؟",
+            type: 'info',
+            showCancelButton: true,
+            cancelButtonColor: '#3085d6',
+            cancelButtonText: 'خیر',
+            allowOutsideClick: false,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'بله'
+        }).then((result) => {
+            if (result.value) {
+                getDocAttachList(serialErja);
+            }
+        })
+    })
+
+
+    $('#attachFile').click(function () {
+        getDocAttachList(serialErja);
+    });
+
+
+    self.selectDocAttach = function (item) {
+        Swal.fire({
+            title: 'تایید دانلود',
+            text: "آیا پیوست انتخابی دانلود شود ؟",
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonColor: '#3085d6',
+            cancelButtonText: 'خیر',
+            allowOutsideClick: false,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'بله'
+        }).then((result) => {
+            if (result.value) {
+                var fileName = item.FName.split(".");
+                var DownloadAttachObject = {
+                    ProgName: 'ERJ1',
+                    ModeCode: '102',
+                    //Group: group_Tiket,
+                    Year: '0000',
+                    SerialNumber: item.SerialNumber,
+                    BandNo: item.BandNo,
+                    ByData: 1,
+                    IP: ipw,
+                    CallProg: 'Web'
+                }
+                ajaxFunction(DocAttachUri, 'POST', DownloadAttachObject).done(function (data) {
+                    var sampleArr = base64ToArrayBuffer(data[0].Atch);
+                    saveByteArray(fileName[0] + ".zip", sampleArr);
+                });
+            }
+        });
+
+    }
+
+
+
+
 
 
 };
