@@ -289,12 +289,12 @@
                     + '        <div class="cardErj">'
                     + '            <div class="header" style="background-color: #f5d3b4;">'
                     + '<div class="form-inline"> '
-                    + '     <div class= "col-md-8 form-inline" > '
+                    + '     <div class= "col-md-9 form-inline" > '
                     + '         <h6 >' + i + ' ) ' + listBand[0].FromUserName + '</h6>'
                     + '         <img src="/Content/img/new item/arrow-back-svgrepo-com.svg" style="width: 11px;margin-left: 0px; margin-right: 0px;" /> '
                     + '         <h6 >' + listBand[0].ToUserName + '</h6> '
                     + '     </div>'
-                    + '     <div class="col-md-4 form-inline"> '
+                    + '     <div class="col-md-3 form-inline"> '
                     + '         <h6 style="padding-left: 5px;">' + listBand[0].RjTimeSt + '</h6> '
                     + '         <h6 >' + listBand[0].RjDate + '</h6> '
                     + '     </div> '
@@ -433,6 +433,89 @@
         ajaxFunction(ErjSaveTicket_DocReadUri, 'POST', DocReadObject).done(function (response) {
 
         });
+    }
+
+
+
+
+    var DocAttachUri = server + '/api/KarbordData/DocAttach/'; // آدرس لیست پیوست 
+    self.DocAttachList = ko.observableArray([]); // ليست پیوست
+    self.AddAttachList = ko.observableArray([]);
+
+    function getDocAttachList(serial) {
+        var DocAttachObject = {
+            ProgName: 'ERJ1',
+            ModeCode: '102',
+            Year: '0000',
+            SerialNumber: serial,
+            BandNo: 0,
+            ByData: 0,
+            IP: ipw,
+            CallProg: 'Web'
+        }
+
+        ajaxFunction(DocAttachUri, 'POST', DocAttachObject).done(function (data) {
+            self.DocAttachList(data);
+        });
+    }
+
+
+    $('#refreshDocAttach').click(function () {
+        Swal.fire({
+            title: 'تایید به روز رسانی',
+            text: "پیوست ها به روز رسانی شود ؟",
+            type: 'info',
+            showCancelButton: true,
+            cancelButtonColor: '#3085d6',
+            cancelButtonText: 'خیر',
+            allowOutsideClick: false,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'بله'
+        }).then((result) => {
+            if (result.value) {
+                getDocAttachList(serialTiket);
+            }
+        })
+    })
+
+
+    $('#attachFile').click(function () {
+        getDocAttachList(serialTiket);
+    });
+
+
+    self.selectDocAttach = function (item) {
+        Swal.fire({
+            title: 'تایید دانلود',
+            text: "آیا پیوست انتخابی دانلود شود ؟",
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonColor: '#3085d6',
+            cancelButtonText: 'خیر',
+            allowOutsideClick: false,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'بله'
+        }).then((result) => {
+            if (result.value) {
+                var fileName = item.FName.split(".");
+                var DownloadAttachObject = {
+                    ProgName: 'ERJ1',
+                    ModeCode: '102',
+                    //Group: group_Tiket,
+                    Year: '0000',
+                    SerialNumber: item.SerialNumber,
+                    BandNo: item.BandNo,
+                    ByData: 1,
+                    IP: ipw,
+                    CallProg: 'Web'
+                }
+                ajaxFunction(DocAttachUri, 'POST', DownloadAttachObject).done(function (data) {
+                    var sampleArr = base64ToArrayBuffer(data[0].Atch);
+                    saveByteArray(fileName[0] + ".zip", sampleArr);
+                });
+            }
+        });
+
     }
 
 
