@@ -513,7 +513,7 @@
     function getDocAttachList(serial) {
         var DocAttachObject = {
             ProgName: 'ERJ1',
-            ModeCode: '102',
+            ModeCode: '1',
             Year: '0000',
             SerialNumber: serial,
             BandNo: 0,
