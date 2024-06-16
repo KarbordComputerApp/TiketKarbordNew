@@ -618,7 +618,7 @@
                 var fileName = item.FName.split(".");
                 var DownloadAttachObject = {
                     ProgName: 'ERJ1',
-                    ModeCode: '102',
+                    ModeCode: '1',
                     //Group: group_Tiket,
                     Year: '0000',
                     SerialNumber: item.SerialNumber,

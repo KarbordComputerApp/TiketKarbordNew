@@ -39,7 +39,7 @@
             LoginLink: false,
             top: null,
             Status: "فعال",
-            ChatMode : 0
+            ChatMode : 1
         }
 
         ajaxFunction(ErjDocXHUri, 'Post', ErjDocXHObject).done(function (dataDocXK) {
