@@ -389,9 +389,14 @@ $('#Tiket_Menu').click(function () {
     sessionStorage.SelectMenu = 1;
 });
 
+$('#Dayjob_Menu').click(function () {
+    sessionStorage.SelectMenu = 2;
+});
+
 
 $('#Erj_Menu').removeAttr('class');
 $('#Tiket_Menu').removeAttr('class');
+$('#Dayjob_Menu').removeAttr('class');
 
 if (sessionStorage.SelectMenu == 0) {
     $('#Erj_Menu').attr('class', 'active');
@@ -399,6 +404,10 @@ if (sessionStorage.SelectMenu == 0) {
 
 if (sessionStorage.SelectMenu == 1) {
     $('#Tiket_Menu').attr('class', 'active');
+}
+
+if (sessionStorage.SelectMenu == 2) {
+    $('#Dayjob_Menu').attr('class', 'active');
 }
 
 

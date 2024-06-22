@@ -168,7 +168,7 @@
                         <i>
                             <img src="~/Content/img/SanadAnbarWhite.png" width="20" />
                         </i>
-                        <span>ارجاعات</span>
+                        <span>پرونده</span>
                     </a>
                     <ul class="ml-menu">
                         <li id="ErjDOC" class="rightClick">
@@ -179,10 +179,6 @@
                         </li>
                         <li id="Erj_Send" class="rightClick">
                             <a href=@Url.Action("Erja","Erj")>ارجاعات پرونده ارسالی</a>
-                        </li>
-
-                        <li id="Dayjob" class="rightClick">
-                            <a href=@Url.Action("Dayjob","Erj")>گزارش کار</a>
                         </li>
                     </ul>
                 </li>
@@ -207,6 +203,22 @@
                         </li>
                     </ul>
                 </li>
+
+                <li id="Dayjob_Menu">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i>
+                            <img src="~/Content/img/SanadAnbarWhite.png" width="20" />
+                        </i>
+                        <span>گزارش كار</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li id="Dayjob" class="rightClick">
+                            <a href=@Url.Action("Dayjob","Erj")>گزارش کار</a>
+                        </li>
+                    </ul>
+                </li>
+
+               
 
             </ul>
         </div>

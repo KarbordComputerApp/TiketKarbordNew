@@ -405,6 +405,7 @@
         element.scrollTop = element.scrollHeight;
     })
 
+
     self.currentPageIndexErjDocH = ko.observable(0);
 
     $('#refreshErjDocH').click(function () {

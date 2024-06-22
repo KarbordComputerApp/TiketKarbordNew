@@ -445,6 +445,13 @@
         element.scrollTop = element.scrollHeight;
     });
 
+    $("#modal-ErjDocErja").on('hidden.bs.modal', function () {
+        if (sessionStorage.ModeCodeErja == "1") {
+            getDocB_Last();
+        }
+    })
+
+
     $('#ShowHideInformation').click(function () {
         if (showHideInformation) {
             showHideInformation = false;
