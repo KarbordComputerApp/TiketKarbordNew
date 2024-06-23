@@ -8,11 +8,13 @@
     var ErjSaveDoc_RjRead_Uri = server + '/api/KarbordData/ErjSaveDoc_RjRead/'; // آدرس ذخیره دیدن ارجاع
     var ErjSaveDoc_BSaveUri = server + '/api/KarbordData/ErjSaveDoc_BSave/'; // آدرس ذخیره ارجاع
     var Web_ErjSaveDoc_HUUri = server + '/api/KarbordData/ErjSaveDoc_HU/'; // آدرس ویرایش پرونده
-
+    var ErjStatusUri = server + '/api/KarbordData/ErjStatus/'; // آدرس وضعیت 
+    var ErjSaveDoc_HStatusUri = server + '/api/KarbordData/ErjSaveDoc_HStatus/'; // آدرس ذخیره وضعیت
 
     self.DocB_LastList = ko.observableArray([]); // لیست گزارش  
     self.ErjResultList = ko.observableArray([]); // لیست نتیجه 
     self.ErjDocErja = ko.observableArray([]); // لیست پرونده  
+    self.ErjStatusList = ko.observableArray([]); // لیست وضعیت 
 
     if (dateNow == null) {
         getDateServer();
@@ -20,7 +22,7 @@
    
 
 
-    var serialErja = 0;
+    var serialNumber = 0;
     var docBMode = 0;
     var bandNo = 0;
 
@@ -66,6 +68,21 @@
         }
     }
 
+    //Get ErjStatus List
+    function getErjStatusList() {
+        list = localStorage.getItem('ErjStatus');
+        if (list != null) {
+            list = JSON.parse(localStorage.getItem('ErjStatus'));
+            self.ErjStatusList(list)
+        }
+        else {
+            ajaxFunction(ErjStatusUri, 'GET').done(function (data) {
+                self.ErjStatusList(data);
+                localStorage.setItem("ErjStatus", JSON.stringify(data));
+            });
+        }
+    }
+    getErjStatusList();
 
 
     function getDocB_Last() {
@@ -233,15 +250,15 @@
 
 
     self.ViewErjDocErja = function (Band) {
-        serialErja = Band.SerialNumber;
+        serialNumber = Band.SerialNumber;
         docBMode = Band.DocBMode;
 
-        getErjUsersList(serialErja);
+        getErjUsersList(serialNumber);
 
-        getDocK(serialErja);
-        getErjResultList(serialErja, null, null, null)
+        getDocK(serialNumber);
+        getErjResultList(serialNumber, null, null, null)
 
-        getErjDocErja(serialErja);
+        getErjDocErja(serialNumber);
 
         $('#m_StatusParvandeh').val(Band.Status);
         $('#m_StatusErja').val(Band.RjStatus);
@@ -302,7 +319,7 @@
         if (Band.RjReadSt == 'T' && sessionStorage.ModeCodeErja == "1") {
             ErjSaveDoc_RjRead_Object = {
                 DocBMode: Band.DocBMode,
-                SerialNumber: serialErja,
+                SerialNumber: serialNumber,
                 BandNo: Band.BandNo,
                 RjReadSt: 'F'
             };
@@ -610,14 +627,14 @@
             confirmButtonText: 'بله'
         }).then((result) => {
             if (result.value) {
-                getDocAttachList(serialErja);
+                getDocAttachList(serialNumber);
             }
         })
     })
 
 
     $('#attachFile').click(function () {
-        getDocAttachList(serialErja);
+        getDocAttachList(serialNumber);
     });
 
 
@@ -664,7 +681,7 @@
         SaveParvandeh();
     })
 
-
+    var flagSave;
     function SaveParvandeh() {
         flagSave = true;
         if (docBMode == 1) { // رونوشت
@@ -763,14 +780,14 @@
                 SerialNumber: serialNumber,
                 Status: status
             };
-            ajaxFunction(ErjSaveDoc_HStatusUri + aceErj + '/' + salErj + '/' + group, 'POST', ErjSaveDoc_HStatusObject).done(function (response) {
+            ajaxFunction(ErjSaveDoc_HStatusUri, 'POST', ErjSaveDoc_HStatusObject).done(function (response) {
 
             });
 
         }
 
 
-        ajaxFunction(ErjSaveDoc_BSaveUri + aceErj + '/' + salErj + '/' + group, 'POST', ErjSaveDoc_BSaveObject).done(function (response) {
+        ajaxFunction(ErjSaveDoc_BSaveUri, 'POST', ErjSaveDoc_BSaveObject).done(function (response) {
             if (flagSave == true) {
                 showNotification(translate('پرونده') + ' ' + serialNumber + ' ' + translate('ذخیره شد'), 1);
             }
@@ -781,11 +798,9 @@
 
             if (flagSave != null) {
                 getDocB_Last();
-                self.sortTableDocB_Last();
             }
 
         });
-        flagInsertFdoch = 1;
     };
 
 
@@ -803,7 +818,7 @@
 
         ErjSaveDoc_HUObject = { // ذخیره اطلاعات پرونده
             SerialNumber: serialNumber,
-            Tanzim: sessionStorage.userName,
+            Tanzim: userName,
             Status: status,
             Spec: $("#m_Spec").val(),
             DocDesc: $("#docDesc").val(),
@@ -832,7 +847,7 @@
             F20: $("#ExtraFields20").val() == null ? '' : $("#ExtraFields20").val(),
         };
 
-        ajaxFunction(Web_ErjSaveDoc_HUUri + aceErj + '/' + salErj + '/' + group, 'POST', ErjSaveDoc_HUObject).done(function (response) {
+        ajaxFunction(Web_ErjSaveDoc_HUUri, 'POST', ErjSaveDoc_HUObject).done(function (response) {
             flag_Save = true;
         });
     }

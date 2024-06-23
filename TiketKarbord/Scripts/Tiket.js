@@ -1,6 +1,6 @@
 ﻿var ViewModel = function () {
     var self = this;
-
+    var bandNo = 0;
     var ErjDocXB_LastUri = server + '/api/KarbordData/ErjDocXB_Last/'; // آدرس گزارش
     var ErjXResultUri = server + '/api/KarbordData/ErjXResult/'; // آدرس نتیجه
 
@@ -396,8 +396,8 @@
             RjDate: '',//rjDate,
             RjTime: rjTime,
             RjMhltDate: "",
-            BandNo: 0,
-            SrMode: 0,
+            BandNo: TiketMode == 1 ? 0 : bandNo,
+            SrMode: TiketMode == 1 ? 0 : 1, 
             RjStatus: "",
             FarayandCode: "",
             MessageSms: "دریافت چت از " + userNameFa, 

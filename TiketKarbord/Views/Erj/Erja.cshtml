@@ -346,6 +346,33 @@
             <div>
                 <div class="row  form-inline ">
                     <div class="col-md-9 row">
+                        
+                        <div id="panelFooterParvandeh" class="col-md-12 row">
+                            <p class="col-md-2">وضعیت ارجاع</p>
+                            <div class="col-md-3">
+                                <div class="form-inline" style="margin-left: 5px; margin-right: 5px;">
+                                    <div class="form-group">
+                                        <input type="text" id="m_StatusErja" class="form-control" />
+                                        <!-- <select id="m_StatusErja" style="font-size:11px"></select>-->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="col-md-2">وضعیت پرونده</p>
+                            <div class="col-md-3">
+                                <div class="form-inline" style="margin-left: 5px; margin-right: 5px;">
+                                    <div class="form-group">
+                                        <select id="m_StatusParvandeh" data-bind="
+                                   options: ErjStatusList,
+                                   optionsText: function(item) {return item.Status},
+                                   optionsValue: 'Status'"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
                         <div id="panelFooterRonevesht" class="col-sm-12 row" style="padding-top: 12px;">
 
                             <div class="col-sm-2">
