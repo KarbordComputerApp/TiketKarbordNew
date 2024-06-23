@@ -305,11 +305,12 @@
 
     function SaveErja() {
         toUserCode = $("#p_ErjUser").val();
+        nameCust = $("#p_NameCust").val();
+
         if (toUserCode == null && toUserCode == "") {
             return showNotification(translate('ارجاع شونده را انتخاب کنید'), 0);
         }
-
-
+        
         rjTime_H = $("#RjTime_H").val();
         rjTime_M = $("#RjTime_M").val();
 
@@ -346,6 +347,7 @@
             SrMode: 0,
             RjStatus: "",
             FarayandCode: "",
+            MessageSms: "دریافت چت از " + userNameFa,
         };
 
         ajaxFunction(ErjSaveTicket_BSaveUri, 'POST', ErjSaveTicket_BSaveObject).done(function (response) {

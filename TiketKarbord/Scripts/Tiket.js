@@ -400,6 +400,7 @@
             SrMode: 0,
             RjStatus: "",
             FarayandCode: "",
+            MessageSms: "دریافت چت از " + userNameFa, 
         };
 
         ajaxFunction(ErjSaveTicket_BSaveUri, 'POST', ErjSaveTicket_BSaveObject).done(function (response) {

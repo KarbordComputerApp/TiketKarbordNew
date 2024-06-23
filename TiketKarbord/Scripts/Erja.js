@@ -6,13 +6,23 @@
     var ErjResultUri = server + '/api/KarbordData/ErjResult/'; // آدرس نتیجه
     var ErjDocErjaUri = server + '/api/KarbordData/ErjDocErja/'; // آدرس  ارجاع
     var ErjSaveDoc_RjRead_Uri = server + '/api/KarbordData/ErjSaveDoc_RjRead/'; // آدرس ذخیره دیدن ارجاع
+    var ErjSaveDoc_BSaveUri = server + '/api/KarbordData/ErjSaveDoc_BSave/'; // آدرس ذخیره ارجاع
+    var Web_ErjSaveDoc_HUUri = server + '/api/KarbordData/ErjSaveDoc_HU/'; // آدرس ویرایش پرونده
 
 
     self.DocB_LastList = ko.observableArray([]); // لیست گزارش  
     self.ErjResultList = ko.observableArray([]); // لیست نتیجه 
     self.ErjDocErja = ko.observableArray([]); // لیست پرونده  
 
+    if (dateNow == null) {
+        getDateServer();
+    }
+   
+
+
     var serialErja = 0;
+    var docBMode = 0;
+    var bandNo = 0;
 
     var erjaMode = sessionStorage.ModeCodeErja;
 
@@ -226,6 +236,8 @@
         serialErja = Band.SerialNumber;
         docBMode = Band.DocBMode;
 
+        getErjUsersList(serialErja);
+
         getDocK(serialErja);
         getErjResultList(serialErja, null, null, null)
 
@@ -255,7 +267,7 @@
             $('#panelFooterRonevesht').removeAttr('hidden', '');
             $('#erja').attr('hidden', '');
 
-            $('#p_SaptDate').val(DateNow);
+            $('#p_SaptDate').val(dateNow);
             $('#p_RjTime_M').val('');
             $('#p_RjTime_H').val('');
 
@@ -274,7 +286,7 @@
             $('#erja').removeAttr('hidden', '');
         }
 
-        if (Band.ToUserCode != sessionStorage.userName || sessionStorage.ModeCodeErja == "2" || useSanadOtherUser == true) {
+        if (Band.ToUserCode.toUpperCase() != userName.toUpperCase() || sessionStorage.ModeCodeErja == "2") {
             flag_Save = true;
             $('#erja').attr('hidden', '');
             $('#panel_Result').attr('hidden', '');
@@ -645,6 +657,218 @@
 
 
 
+
+
+
+    $('#saveParvandeh').click(function () {
+        SaveParvandeh();
+    })
+
+
+    function SaveParvandeh() {
+        flagSave = true;
+        if (docBMode == 1) { // رونوشت
+            trs = localStorage.getItem("userModeErj");
+            if (trs == 'ADMIN') {
+                SaveDoch();
+            }
+
+            ErjSaveDoc_CD(bandNo);
+            ErjSaveDoc_CSave(bandNo, true);
+        }
+        else {
+            ErjSaveDoc_BSave(bandNo);
+        }
+    }
+
+
+    //Add DocB  ذخیره ارجاعات
+    function ErjSaveDoc_BSave(bandNoImput) {
+        rjDate = dateNow;
+        rjMhltDate = $("#RjMhltDate").val().toEnglishDigit();
+        rjTime_H = $("#RjTime_H").val();
+        rjTime_M = $("#RjTime_M").val();
+        fromUserCode = userName;
+
+        
+        toUserCode = $("#p_ErjUser").val();
+        rjTime = 0;
+        if (bandNoImput == 0 || sessionStorage.ModeCodeErja == "2") {
+            if (rjTime_H != '' || rjTime_M != '') {
+
+                if (rjTime_M != '') {
+                    rjTime_M = parseInt(rjTime_M);
+                    rjTime_M = rjTime_M / 60;
+                }
+                else {
+                    rjTime_M = parseInt('0');
+                }
+
+                if (rjTime_H != '') {
+                    rjTime_H = parseInt(rjTime_H);
+                }
+                else {
+                    rjTime_H = parseInt("0");
+                }
+
+
+                rjTime = rjTime_H + rjTime_M;
+            }
+        }
+
+        var ErjSaveDoc_BSaveObject;
+        if (bandNoImput == 0 || sessionStorage.ModeCodeErja == "2") { // erja
+            natijeh = $("#e_Result").val();
+
+
+            ErjSaveDoc_BSaveObject = {
+                SerialNumber: serialNumber,
+                Natijeh: natijeh,
+                FromUserCode: fromUserCode,
+                ToUserCode: toUserCode,
+                RjDate: '',//rjDate,
+                RjTime: rjTime,
+                RjMhltDate: rjMhltDate,
+                BandNo: bandNoImput,
+                SrMode: sessionStorage.ModeCodeErja == "1" ? 0 : 1,
+                RjStatus: $("#m_StatusErja").val(),
+                FarayandCode: self.FarayandCode(),
+            };
+        }
+        else // save
+        {
+
+            SaveDoch();
+            status = $("#m_StatusParvandeh").val();
+
+            natijeh = $("#Result").val();
+
+            ErjSaveDoc_BSaveObject = {
+                SerialNumber: serialNumber,
+                Natijeh: natijeh,
+                FromUserCode: '',
+                ToUserCode: '',
+                RjDate: '',//rjDate,
+                RjTime: 0,
+                RjMhltDate: '',
+                BandNo: bandNoImput,
+                SrMode: sessionStorage.ModeCodeErja == "1" ? 0 : 1,
+                RjStatus: $("#m_StatusErja").val(),
+                FarayandCode: 0,
+            };
+
+
+
+            ErjSaveDoc_HStatusObject = {
+                SerialNumber: serialNumber,
+                Status: status
+            };
+            ajaxFunction(ErjSaveDoc_HStatusUri + aceErj + '/' + salErj + '/' + group, 'POST', ErjSaveDoc_HStatusObject).done(function (response) {
+
+            });
+
+        }
+
+
+        ajaxFunction(ErjSaveDoc_BSaveUri + aceErj + '/' + salErj + '/' + group, 'POST', ErjSaveDoc_BSaveObject).done(function (response) {
+            if (flagSave == true) {
+                showNotification(translate('پرونده') + ' ' + serialNumber + ' ' + translate('ذخیره شد'), 1);
+            }
+            else if (flagSave == false) {
+            }
+
+            $("#TableBodyListErjUsersRonevesht").empty();
+
+            if (flagSave != null) {
+                getDocB_Last();
+                self.sortTableDocB_Last();
+            }
+
+        });
+        flagInsertFdoch = 1;
+    };
+
+
+
+
+    function SaveDoch() {
+        status = $("#m_StatusParvandeh").val();
+
+        if ($("#specialComm").css('font-style') == 'italic')
+            special = specialComm;
+        else
+            special = $("#specialComm").val();
+
+
+
+        ErjSaveDoc_HUObject = { // ذخیره اطلاعات پرونده
+            SerialNumber: serialNumber,
+            Tanzim: sessionStorage.userName,
+            Status: status,
+            Spec: $("#m_Spec").val(),
+            DocDesc: $("#docDesc").val(),
+            EghdamComm: $("#eghdamComm").val(),
+            FinalComm: $("#finalComm").val(),
+            SpecialComm: special,
+            F01: $("#ExtraFields01").val() == null ? '' : $("#ExtraFields01").val(),
+            F02: $("#ExtraFields02").val() == null ? '' : $("#ExtraFields02").val(),
+            F03: $("#ExtraFields03").val() == null ? '' : $("#ExtraFields03").val(),
+            F04: $("#ExtraFields04").val() == null ? '' : $("#ExtraFields04").val(),
+            F05: $("#ExtraFields05").val() == null ? '' : $("#ExtraFields05").val(),
+            F06: $("#ExtraFields06").val() == null ? '' : $("#ExtraFields06").val(),
+            F07: $("#ExtraFields07").val() == null ? '' : $("#ExtraFields07").val(),
+            F08: $("#ExtraFields08").val() == null ? '' : $("#ExtraFields08").val(),
+            F09: $("#ExtraFields09").val() == null ? '' : $("#ExtraFields09").val(),
+            F10: $("#ExtraFields10").val() == null ? '' : $("#ExtraFields10").val(),
+            F11: $("#ExtraFields11").val() == null ? '' : $("#ExtraFields11").val(),
+            F12: $("#ExtraFields12").val() == null ? '' : $("#ExtraFields12").val(),
+            F13: $("#ExtraFields13").val() == null ? '' : $("#ExtraFields13").val(),
+            F14: $("#ExtraFields14").val() == null ? '' : $("#ExtraFields14").val(),
+            F15: $("#ExtraFields15").val() == null ? '' : $("#ExtraFields15").val(),
+            F16: $("#ExtraFields16").val() == null ? '' : $("#ExtraFields16").val(),
+            F17: $("#ExtraFields17").val() == null ? '' : $("#ExtraFields17").val(),
+            F18: $("#ExtraFields18").val() == null ? '' : $("#ExtraFields18").val(),
+            F19: $("#ExtraFields19").val() == null ? '' : $("#ExtraFields19").val(),
+            F20: $("#ExtraFields20").val() == null ? '' : $("#ExtraFields20").val(),
+        };
+
+        ajaxFunction(Web_ErjSaveDoc_HUUri + aceErj + '/' + salErj + '/' + group, 'POST', ErjSaveDoc_HUObject).done(function (response) {
+            flag_Save = true;
+        });
+    }
+
+
+
+    $('#erja').click(function () {
+        $('#p_Result').css('display', 'none');
+        $('#modal-Erja').modal('show');
+    });
+
+    $("#Close_ModalErj").click(function (e) {
+        $('#modal-Erja').modal('hide');
+    })
+
+
+    self.ErjUsersList = ko.observableArray([]); // لیست کاربران  
+    var ErjUsersUri = server + '/api/KarbordData/Web_ErjUsers/'; // آدرس کاربران زمان ارجاع
+
+    function getErjUsersList(serial) {
+        list = localStorage.getItem('ErjUsers');
+        if (list != null) {
+            list = JSON.parse(localStorage.getItem('ErjUsers'));
+            self.ErjUsersList(list)
+        }
+        else {
+            var ErjUsersObject = {
+                userCode: userName,
+                SerialNumber: serial,
+            }
+            ajaxFunction(ErjUsersUri, 'Post', ErjUsersObject).done(function (data) {
+                self.ErjUsersList(data);
+                localStorage.setItem("ErjUsers", JSON.stringify(data));
+            });
+        }
+    }
 
 
 
