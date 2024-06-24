@@ -204,7 +204,7 @@
     function SaveDocXK() {
 
         docDate = $("#p_DocDate").val().toEnglishDigit();
-        natijeh = $("#Result").val();
+        var natijeh = $("#Result").val();
         p_NameCust = $("#p_NameCust").val();
         p_Motaghazi = $("#p_Motaghazi").val();
         p_Status = $("#p_Status").val();
@@ -327,9 +327,9 @@
             return showNotification(translate('زمان صرف شده را وارد کنید'), 0);
         }
 
-        natijeh = $("#e_Result").val();
+        var e_Natijeh = $("#e_Result").val();
 
-        if (natijeh == '') {
+        if (e_Natijeh == '') {
             return showNotification(translate('متن ارجاع را وارد کنید'), 0);
         }
 
@@ -337,7 +337,7 @@
 
         ErjSaveTicket_BSaveObject = {
             SerialNumber: serialTiket,
-            Natijeh: natijeh,
+            Natijeh: e_Natijeh,
             FromUserCode: userName,
             ToUserCode: toUserCode,
             RjDate: '',//rjDate,
