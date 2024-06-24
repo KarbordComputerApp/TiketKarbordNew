@@ -268,7 +268,7 @@
         $('#modal-Erja').modal('show');
         $("#RjTime_H").val("");
         $("#RjTime_M").val("");
-        $('#e_Result').val($('#Result').val());
+        $('#e_Result').val("");
     })
 
     $('#OpenChat').click(function () {

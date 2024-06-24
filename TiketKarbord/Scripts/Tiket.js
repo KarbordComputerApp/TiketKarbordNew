@@ -213,6 +213,9 @@
     }
 
 
+    var lastResult = ""; 
+    var lastToUserCode = ""; 
+    var lastUserErjCode = ""; 
 
 
     function SetDataErjDocXErja() {
@@ -337,11 +340,12 @@
 
                 $('#BodyErjDocXErja').append(textBody);
             }
-            lastUserErjCode = listBand[0].FromUserCode;
+            lastUserErjCode = listBand[0].FromUserCode.toUpperCase();
             lastUserErjName = listBand[0].FromUserName;
 
             if (TiketMode != "1") {
-                $('#Result').val(listBand[0].RjComm);
+                lastResult = listBand[0].RjComm;
+                lastToUserCode = listBand[0].ToUserCode;
             }
 
         }
@@ -356,7 +360,15 @@
         $('#modal-Erja').modal('show');
         $("#RjTime_H").val("");
         $("#RjTime_M").val("");
-        $('#e_Result').val($('#Result').val());
+
+        if (TiketMode != "1") {
+            $('#e_Result').val(lastResult);
+            $('#p_ErjUser').val(lastToUserCode);
+        }
+        else {
+            $('#p_ErjUser').val(lastUserErjCode); 
+        }
+
     })
 
     $('#OpenChat').click(function () {
