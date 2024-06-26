@@ -245,7 +245,8 @@
             CallProg: 'Web',
             LoginLink: false,
             ChatMode: chatMode,
-            ChatActive: p_ActiveChat
+            ChatActive: p_ActiveChat,
+            DocRead: false
         }
 
         ajaxFunction(ErjSaveTicketUri, 'POST', ErjSaveTicket_HI).done(function (data) {

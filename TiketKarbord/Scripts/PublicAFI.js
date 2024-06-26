@@ -517,24 +517,24 @@ function SetValidationErj(data) {
 
 
 
-    //NEW_DOCX_SERVICE CHG_DOCX_SERVICE   DEL_DOCX_SERVICE  PRN_DOCX_SERVICE  OTHERUSER_DOCX_SERVICE
-    validation = CheckAccessErj('DOCX_SERVICE');
-    validation == true ? localStorage.setItem("DOCX_SERVICE", "true") : localStorage.setItem("DOCX_SERVICE", "false")
+    //NEW_DOCX_TICKET CHG_DOCX_TICKET   DEL_DOCX_TICKET  PRN_DOCX_TICKET  OTHERUSER_DOCX_TICKET
+    validation = CheckAccessErj('DOCX_TICKET');
+    validation == true ? localStorage.setItem("DOCX_TICKET", "true") : localStorage.setItem("DOCX_TICKET", "false")
 
-    validation = CheckAccessErj('NEW_DOCX_SERVICE');
-    validation == true ? localStorage.setItem("NEW_DOCX_SERVICE", "true") : localStorage.setItem("NEW_DOCX_SERVICE", "false")
+    validation = CheckAccessErj('NEW_DOCX_TICKET');
+    validation == true ? localStorage.setItem("NEW_DOCX_TICKET", "true") : localStorage.setItem("NEW_DOCX_TICKET", "false")
 
-    validation = CheckAccessErj('CHG_DOCX_SERVICE');
-    validation == true ? localStorage.setItem("CHG_DOCX_SERVICE", "true") : localStorage.setItem("CHG_DOCX_SERVICE", "false")
+    validation = CheckAccessErj('CHG_DOCX_TICKET');
+    validation == true ? localStorage.setItem("CHG_DOCX_TICKET", "true") : localStorage.setItem("CHG_DOCX_TICKET", "false")
 
-    validation = CheckAccessErj('DEL_DOCX_SERVICE');
-    validation == true ? localStorage.setItem("DEL_DOCX_SERVICE", "true") : localStorage.setItem("DEL_DOCX_SERVICE", "false")
+    validation = CheckAccessErj('DEL_DOCX_TICKET');
+    validation == true ? localStorage.setItem("DEL_DOCX_TICKET", "true") : localStorage.setItem("DEL_DOCX_TICKET", "false")
 
-    validation = CheckAccessErj('PRN_DOCX_SERVICE');
-    validation == true ? localStorage.setItem("PRN_DOCX_SERVICE", "true") : localStorage.setItem("PRN_DOCX_SERVICE", "false")
+    validation = CheckAccessErj('PRN_DOCX_TICKET');
+    validation == true ? localStorage.setItem("PRN_DOCX_TICKET", "true") : localStorage.setItem("PRN_DOCX_TICKET", "false")
 
-    validation = CheckAccessErj('OTHERUSER_DOCX_SERVICE');
-    validation == true ? localStorage.setItem("OTHERUSER_DOCX_SERVICE", "true") : localStorage.setItem("OTHERUSER_DOCX_SERVICE", "false")
+    validation = CheckAccessErj('OTHERUSER_DOCX_TICKET');
+    validation == true ? localStorage.setItem("OTHERUSER_DOCX_TICKET", "true") : localStorage.setItem("OTHERUSER_DOCX_TICKET", "false")
 
 }
 
@@ -564,7 +564,7 @@ function LogOut() {
 
 localStorage.getItem("ErjDoc") == "true" ? $("#ErjDOC").show() : $("#ErjDOC").hide();
 localStorage.getItem("DAYR") == "true" ? $("#Dayjob").show() : $("#Dayjob").hide();
-localStorage.getItem("DOCX_SERVICE") == "true" ? $("#TiketDOC").show() : $("#TiketDOC").hide();
+localStorage.getItem("DOCX_TICKET") == "true" ? $("#TiketDOC").show() : $("#TiketDOC").hide();
 
 
 function sleep(milliseconds) {
