@@ -420,14 +420,23 @@
             BandNo: TiketMode == 1 ? 0 : bandNo,
             SrMode: TiketMode == 1 ? 0 : 1, 
             RjStatus: "",
-            FarayandCode: "",
-            MessageSms: "دریافت چت از " + userNameFa, 
+            FarayandCode: ""
         };
 
         ajaxFunction(ErjSaveTicket_BSaveUri, 'POST', ErjSaveTicket_BSaveObject).done(function (response) {
             $('#modal-Erja').modal('hide');
             $('#modal-ErjDocTiket').modal('hide');
             //getDocXB_Last();
+
+
+            var SendMessageSorenaObject = {
+                UserCode: toUserCode,
+                Message: "دریافت چت از " + userNameFa,
+            }
+            ajaxFunction(SendMessageSorenaUri, 'POST', SendMessageSorenaObject).done(function (sorena) {
+                sorena = sorena;
+            });
+
         });
 
     }

@@ -348,13 +348,20 @@
             SrMode: 0,
             RjStatus: "",
             FarayandCode: "",
-            MessageSms: "دریافت چت از " + userNameFa,
         };
 
         ajaxFunction(ErjSaveTicket_BSaveUri, 'POST', ErjSaveTicket_BSaveObject).done(function (response) {
             $('#modal-Erja').modal('hide');
             $('#modal-DocXK').modal('hide');
             //getErjDocXH(false);
+            var SendMessageSorenaObject = {
+                UserCode: toUserCode,
+                Message: "دریافت چت از " + userNameFa,
+            }
+            ajaxFunction(SendMessageSorenaUri, 'POST', SendMessageSorenaObject).done(function (sorena) {
+                sorena = sorena;
+            });
+
         });
 
     }

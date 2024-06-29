@@ -6,6 +6,8 @@ var server = "http://localhost:52798/";
 var userName = localStorage.getItem('userNameTiket');
 var userNameFa = localStorage.getItem('userNameFaTiket');
 
+var SendMessageSorenaUri = server + '/api/KarbordData/SendMessageSorena/';
+
 $('#userNameFa').text(userNameFa);
 
 //var pass = localStorage.getItem('password');
