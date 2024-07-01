@@ -21,7 +21,7 @@
 
     $("#saveDocXK").hide();
     $("#SendDocXK").hide();
-    var CHG_DOCX = localStorage.getItem("CHG_DOCX_SERVICE")
+    var CHG_DOCX = localStorage.getItem("CHG_DOCX_TICKET")
 
     if (CHG_DOCX == "true") {
         $("#saveDocXK").show();
