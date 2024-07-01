@@ -13,6 +13,7 @@ $('#userNameFa').text(userNameFa);
 //var pass = localStorage.getItem('password');
 
 var dateNow;
+var timeNow;
 var activeAction = true;
 
 var key_F1 = 112;
@@ -318,7 +319,17 @@ function getDateServer() {
         ajaxFunction(DateUri, 'GET').done(function (data) {
             listDate = data[0].split("/");
             dateNow = data[0];
+            hourNow = data[0];
             SalNow = listDate[0];
+        });
+    }
+}
+
+function getTimeServer() {
+    if (server != null) {
+        var TimeUri = server + '/api/KarbordData/Time/'; // آدرس  ساعت سرور
+        ajaxFunction(TimeUri, 'GET').done(function (data) {
+            timeNow = data[0];
         });
     }
 }

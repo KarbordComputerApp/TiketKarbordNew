@@ -44,6 +44,7 @@
                                 <div class="row">
                                     <p style="padding-left:15px"> <span>شماره :</span> <span data-bind="text: DocNo"></span></p>
                                     <p style="padding-left:15px"> <span>تاریخ :</span> <span data-bind="text: DocDate"></span></p>
+                                    <p style="padding-left:15px"> <span>زمان ارجاع :</span> <span data-bind="text: RjHour"></span></p>
                                 </div>
 
                                 <p><span>ملاحظات :</span> <span data-bind="text: Spec "></span></p>
@@ -289,7 +290,7 @@
                             <div class="col-md-4 col-sm-12">
                                 <div class="form-inline">
                                     <div class="form-group">
-                                        <select id="p_ErjUser" data-bind="options: ErjUsersList,
+                                        <select id="p_ErjUser" data-bind="options: DocXUsersList,
                                                            optionsText: function(item) {return item.Name},
                                                            optionsValue: 'Code'" style="font-size:11px"></select>
                                     </div>

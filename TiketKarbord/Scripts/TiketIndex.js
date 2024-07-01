@@ -6,7 +6,7 @@
     var TicketStatusUri = server + '/api/KarbordData/Web_TicketStatus/'; // آدرس وضعیت تیکت ها 
     var ErjStatusUri = server + '/api/KarbordData/ErjStatus/'; // آدرس وضعیت 
     var GetTokenUri = server + '/api/Data/Token/'; // آدرس دریافت توکن 
-    var ErjUsersUri = server + '/api/KarbordData/Web_ErjUsers/'; // آدرس کاربران زمان ارجاع
+    var DocXUsersUri = server + '/api/KarbordData/Web_DocXUsers/'; // آدرس کاربران زمان ارجاع
     var ErjDocXErjaUri = server + '/api/KarbordData/Web_ErjDocXErja/'; // آدرس ریز ارجاعات
     var ErjSaveTicket_BSaveUri = server + '/api/KarbordData/ErjSaveTicket_BSave/'; //آدرس ذخیره ارجاع
     var ErjSaveTicket_DocReadUri = server + '/api/KarbordData/ErjSaveTicket_DocRead/'; //آدرس دیده شدن تیکت
@@ -39,7 +39,7 @@
             LoginLink: false,
             top: null,
             Status: "فعال",
-            ChatMode : 1
+            ChatMode: 1
         }
 
         ajaxFunction(ErjDocXHUri, 'Post', ErjDocXHObject).done(function (dataDocXK) {
@@ -124,7 +124,6 @@
         if (item["ChatActive"] == true) {
             $('#OpenChat').show();
         }
-        getErjUsersList(serialTiket);
         getErjDocXErja(serialTiket);
         ReadTiket(serialTiket);
         $('#modal-DocXK').modal('show');
@@ -281,27 +280,28 @@
 
 
 
-
-    self.ErjUsersList = ko.observableArray([]); // لیست کاربران  
+    self.DocXUsersList = ko.observableArray([]); // لیست کاربران  
     self.p_ErjUser = ko.observable();
 
-    function getErjUsersList(serial) {
-        list = localStorage.getItem('ErjUsers');
+    function getDocXUsersList() {
+        list = localStorage.getItem('DocXUsers');
         if (list != null) {
-            list = JSON.parse(localStorage.getItem('ErjUsers'));
-            self.ErjUsersList(list)
+            list = JSON.parse(localStorage.getItem('DocXUsers'));
+            self.DocXUsersList(list)
         }
         else {
-            var ErjUsersObject = {
-                userCode: userName,
-                SerialNumber: serial,
+            var DocXUsersObject = {
+                UserCode: userName,
+                TrsId: 1,
             }
-            ajaxFunction(ErjUsersUri, 'Post', ErjUsersObject).done(function (data) {
-                self.ErjUsersList(data);
-                localStorage.setItem("ErjUsers", JSON.stringify(data));
+            ajaxFunction(DocXUsersUri, 'Post', DocXUsersObject).done(function (data) {
+                self.DocXUsersList(data);
+                localStorage.setItem("DocXUsers", JSON.stringify(data));
             });
         }
     }
+
+    getDocXUsersList();
 
 
     function SaveErja() {
@@ -311,7 +311,7 @@
         if (toUserCode == null && toUserCode == "") {
             return showNotification(translate('ارجاع شونده را انتخاب کنید'), 0);
         }
-        
+
         rjTime_H = $("#RjTime_H").val();
         rjTime_M = $("#RjTime_M").val();
 
@@ -335,7 +335,7 @@
         }
 
         SaveDocXK();
-
+        getTimeServer();
         ErjSaveTicket_BSaveObject = {
             SerialNumber: serialTiket,
             Natijeh: e_Natijeh,
@@ -348,6 +348,7 @@
             SrMode: 0,
             RjStatus: "",
             FarayandCode: "",
+            RjHour: timeNow
         };
 
         ajaxFunction(ErjSaveTicket_BSaveUri, 'POST', ErjSaveTicket_BSaveObject).done(function (response) {
@@ -551,7 +552,7 @@
             DocReadSt: "F",
         };
         ajaxFunction(ErjSaveTicket_DocReadUri, 'POST', DocReadObject).done(function (response) {
-            
+
         });
     }
 

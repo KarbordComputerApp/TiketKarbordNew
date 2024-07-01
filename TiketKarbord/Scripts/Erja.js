@@ -19,7 +19,7 @@
     if (dateNow == null) {
         getDateServer();
     }
-   
+
 
 
     var serialNumber = 0;
@@ -153,7 +153,7 @@
             SrchSt: '',
             SerialNumber: serialnumber,
         };
-        ajaxFunction(DocKUri , 'POST', DocKObject).done(function (response) {
+        ajaxFunction(DocKUri, 'POST', DocKObject).done(function (response) {
             item = response[0];
             $("#m_docno").val(item.DocNo);
 
@@ -213,7 +213,7 @@
             $("#ExtraFields18").val(item.F18);
             $("#ExtraFields19").val(item.F19);
             $("#ExtraFields20").val(item.F20);
-           
+
         });
     }
 
@@ -336,7 +336,7 @@
     self.FilterErj = ko.computed(function () {
         var filter = self.FilterErjValue();
         return ko.utils.arrayFilter(self.ErjDocErja(), function (item) {
-            return item.BandNo == filter; 
+            return item.BandNo == filter;
         });
     });
 
@@ -459,7 +459,7 @@
                     + '</div>'
 
                 $('#BodyErjDocH').append(textBody);
-               
+
             }
             if (i > 0)
                 bandNo = i
@@ -707,7 +707,7 @@
         rjTime_M = $("#RjTime_M").val();
         fromUserCode = userName;
 
-        
+
         toUserCode = $("#p_ErjUser").val();
         rjTime = 0;
         if (bandNoImput == 0 || sessionStorage.ModeCodeErja == "2") {
@@ -760,6 +760,7 @@
 
             natijeh = $("#Result").val();
 
+            getTimeServer();
             ErjSaveDoc_BSaveObject = {
                 SerialNumber: serialNumber,
                 Natijeh: natijeh,
@@ -772,6 +773,7 @@
                 SrMode: sessionStorage.ModeCodeErja == "1" ? 0 : 1,
                 RjStatus: $("#m_StatusErja").val(),
                 FarayandCode: 0,
+                RjHour: timeNow
             };
 
 
@@ -868,22 +870,15 @@
     var ErjUsersUri = server + '/api/KarbordData/Web_ErjUsers/'; // آدرس کاربران زمان ارجاع
 
     function getErjUsersList(serial) {
-        list = localStorage.getItem('ErjUsers');
-        if (list != null) {
-            list = JSON.parse(localStorage.getItem('ErjUsers'));
-            self.ErjUsersList(list)
+        var ErjUsersObject = {
+            userCode: userName,
+            SerialNumber: serial,
         }
-        else {
-            var ErjUsersObject = {
-                userCode: userName,
-                SerialNumber: serial,
-            }
-            ajaxFunction(ErjUsersUri, 'Post', ErjUsersObject).done(function (data) {
-                self.ErjUsersList(data);
-                localStorage.setItem("ErjUsers", JSON.stringify(data));
-            });
-        }
+        ajaxFunction(ErjUsersUri, 'Post', ErjUsersObject).done(function (data) {
+            self.ErjUsersList(data);
+        });
     }
+}
 
 
 

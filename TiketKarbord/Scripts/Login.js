@@ -71,6 +71,7 @@
                     getIP();
                     getAccessUser();
                     localStorage.removeItem('ErjUsers');
+                    localStorage.removeItem('DocXUsers');
                     window.location.href = localStorage.getItem("urlIndex");
                 }
                 else {
