@@ -878,10 +878,6 @@
             self.ErjUsersList(data);
         });
     }
-}
-
-
-
 };
 
 ko.applyBindings(new ViewModel());
