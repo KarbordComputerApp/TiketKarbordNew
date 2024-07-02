@@ -214,9 +214,9 @@
     }
 
 
-    var lastResult = ""; 
-    var lastToUserCode = ""; 
-    var lastUserErjCode = ""; 
+    var lastResult = "";
+    var lastToUserCode = "";
+    var lastUserErjCode = "";
 
 
     function SetDataErjDocXErja() {
@@ -302,14 +302,15 @@
                     + '        <div class="cardErj">'
                     + '            <div class="header" style="background-color: #f5d3b4;">'
                     + '<div class="form-inline"> '
-                    + '     <div class= "col-md-9 form-inline" > '
+                    + '     <div class= "col-md form-inline" > '
                     + '         <h6 >' + i + ' ) ' + listBand[0].FromUserName + '</h6>'
                     + '         <img src="/Content/img/new item/arrow-back-svgrepo-com.svg" style="width: 11px;margin-left: 0px; margin-right: 0px;" /> '
                     + '         <h6 >' + listBand[0].ToUserName + '</h6> '
                     + '     </div>'
-                    + '     <div class="col-md-3 form-inline"> '
-                    + '         <h6 style="padding-left: 5px;">' + listBand[0].RjTimeSt + '</h6> '
+                    + '     <div class="col-md form-inline"  style="direction:ltr"> '
                     + '         <h6 >' + listBand[0].RjDate + '</h6> '
+                    + '         <h6 style="padding-left: 5px;">' + listBand[0].RjTimeSt + '</h6> '
+                    + '         <h6 style="padding-left: 5px;">' + listBand[0].RjHour + '</h6> '
                     + '     </div> '
                     + '</div>';
 
@@ -367,7 +368,7 @@
             $('#p_ErjUser').val(lastToUserCode);
         }
         else {
-            $('#p_ErjUser').val(lastUserErjCode); 
+            $('#p_ErjUser').val(lastUserErjCode);
         }
 
     })
@@ -420,7 +421,7 @@
             RjTime: rjTime,
             RjMhltDate: "",
             BandNo: TiketMode == 1 ? 0 : bandNo,
-            SrMode: TiketMode == 1 ? 0 : 1, 
+            SrMode: TiketMode == 1 ? 0 : 1,
             RjStatus: "",
             FarayandCode: "",
             RjHour: timeNow
