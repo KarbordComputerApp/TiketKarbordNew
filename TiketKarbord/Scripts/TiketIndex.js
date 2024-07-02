@@ -292,7 +292,7 @@
         else {
             var DocXUsersObject = {
                 UserCode: userName,
-                TrsId: 1,
+                TrsId: 4,
             }
             ajaxFunction(DocXUsersUri, 'Post', DocXUsersObject).done(function (data) {
                 self.DocXUsersList(data);
