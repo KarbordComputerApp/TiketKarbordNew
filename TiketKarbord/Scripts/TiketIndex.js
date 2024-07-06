@@ -248,7 +248,7 @@
             DocRead: false
         }
 
-        ajaxFunction(ErjSaveTicketUri, 'POST', ErjSaveTicket_HI).done(function (data) {
+        ajaxFunction(ErjSaveTicketUri, 'POST', ErjSaveTicket_HI, true).done(function (data) {
             //getErjDocXH(false);
             $('#modal-DocXK').modal('hide');
         });
@@ -269,6 +269,7 @@
         $("#RjTime_H").val("");
         $("#RjTime_M").val("");
         $('#e_Result').val("");
+        $("#saveErja").show();
     })
 
     $('#OpenChat').click(function () {
@@ -312,8 +313,8 @@
             return showNotification(translate('ارجاع شونده را انتخاب کنید'), 0);
         }
 
-        rjTime_H = $("#RjTime_H").val();
-        rjTime_M = $("#RjTime_M").val();
+        rjTime_H = $("#RjTime_H").val().toEnglishDigit();
+        rjTime_M = $("#RjTime_M").val().toEnglishDigit();
 
         rjTime_H = rjTime_H == "" ? 0 : parseInt(rjTime_H);
         rjTime_M = rjTime_M == "" ? 0 : parseInt(rjTime_M);
@@ -333,7 +334,7 @@
         if (e_Natijeh == '') {
             return showNotification(translate('متن ارجاع را وارد کنید'), 0);
         }
-
+        $("#saveErja").hide();
         SaveDocXK();
         getTimeServer();
         ErjSaveTicket_BSaveObject = {
@@ -351,7 +352,8 @@
             RjHour: timeNow
         };
 
-        ajaxFunction(ErjSaveTicket_BSaveUri, 'POST', ErjSaveTicket_BSaveObject).done(function (response) {
+        ajaxFunction(ErjSaveTicket_BSaveUri, 'POST', ErjSaveTicket_BSaveObject,true).done(function (response) {
+            $("#saveErja").show();
             $('#modal-Erja').modal('hide');
             $('#modal-DocXK').modal('hide');
             //getErjDocXH(false);

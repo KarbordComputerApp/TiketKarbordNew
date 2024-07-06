@@ -704,8 +704,8 @@
     function ErjSaveDoc_BSave(bandNoImput) {
         rjDate = dateNow;
         rjMhltDate = $("#RjMhltDate").val().toEnglishDigit();
-        rjTime_H = $("#RjTime_H").val();
-        rjTime_M = $("#RjTime_M").val();
+        rjTime_H = $("#RjTime_H").val().toEnglishDigit();
+        rjTime_M = $("#RjTime_M").val().toEnglishDigit();
         fromUserCode = userName;
 
 

@@ -65,6 +65,7 @@
     getDocXB_Last();
 
 
+
     $('#refreshTiket').click(function () {
         Swal.fire({
             title: mes_Refresh,
@@ -362,6 +363,7 @@
         $('#modal-Erja').modal('show');
         $("#RjTime_H").val("");
         $("#RjTime_M").val("");
+        $("#saveErja").show();
 
         if (TiketMode != "1") {
             $('#e_Result').val(lastResult);
@@ -389,8 +391,8 @@
         }
 
 
-        rjTime_H = $("#RjTime_H").val();
-        rjTime_M = $("#RjTime_M").val();
+        rjTime_H = $("#RjTime_H").val().toEnglishDigit();
+        rjTime_M = $("#RjTime_M").val().toEnglishDigit();
 
         rjTime_H = rjTime_H == "" ? 0 : parseInt(rjTime_H);
         rjTime_M = rjTime_M == "" ? 0 : parseInt(rjTime_M);
@@ -411,6 +413,7 @@
             return showNotification(translate('متن ارجاع را وارد کنید'), 0);
         }
 
+        $("#saveErja").hide();
         getTimeServer();
         ErjSaveTicket_BSaveObject = {
             SerialNumber: serialTiket,
@@ -427,11 +430,11 @@
             RjHour: timeNow
         };
 
-        ajaxFunction(ErjSaveTicket_BSaveUri, 'POST', ErjSaveTicket_BSaveObject).done(function (response) {
+        ajaxFunction(ErjSaveTicket_BSaveUri, 'POST', ErjSaveTicket_BSaveObject,true).done(function (response) {
+            //$("#saveErja").show();
             $('#modal-Erja').modal('hide');
             $('#modal-ErjDocTiket').modal('hide');
             //getDocXB_Last();
-
 
             var SendMessageSorenaObject = {
                 UserCode: toUserCode,
