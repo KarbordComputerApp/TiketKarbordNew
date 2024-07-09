@@ -1,7 +1,12 @@
-@font-face {
+/*@font-face {
     font-family: 'vazir';
     src: url('../fonts/Vazir-Bold-FD-WOL.eot?#') format('eot'), url('../fonts/Vazir-Bold-FD-WOL.woff') format('woff'), url('../fonts/Vazir-Bold-FD-WOL.ttf') format('truetype')
 }
+    */
+
+
+
+
 /*! * Materialize vundefined (http://materializecss.com) * Copyright 2014-2017 Materialize * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE) */
 
 .materialize-red {
