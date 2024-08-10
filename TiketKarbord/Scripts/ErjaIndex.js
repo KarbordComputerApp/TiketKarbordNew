@@ -16,7 +16,7 @@
     self.RepToUsersList = ko.observableArray([]); // لیست ارجاع شونده / دهنده 
     self.DocAttachList = ko.observableArray([]); // ليست پیوست
     self.TestDoc_DeleteList = ko.observableArray([]); // لیست تست حذف 
-     
+
 
     var ErjDocHUri = server + '/api/KarbordData/ErjDocH/'; // آدرس پرونده ها  
     var ErjDocErjaUri = server + '/api/KarbordData/ErjDocErja/'; // آدرس  ارجاع
@@ -24,7 +24,9 @@
     //var MahramanehUri = server + '/api/KarbordData/Mahramaneh/'; // آدرس محرمانه
     //var ErjStatusUri = server + '/api/KarbordData/ErjStatus/'; // آدرس وضعیت 
     var ErjUsersUri = server + '/api/KarbordData/Web_ErjUsers/'; // آدرس کاربران زمان ارجاع
-    
+
+    var ErjSaveDoc_BSaveUri = server + '/api/KarbordData/ErjSaveDoc_BSave/'; // آدرس ذخیره ارجاع
+    var ErjSaveDoc_CSaveUri = server + '/api/KarbordData/ErjSaveDoc_CSave/'; // آدرس ذخیره رونوشت
 
 
 
@@ -32,7 +34,7 @@
 
 
 
-    self.p_DocDate = ko.observable(''); 
+    self.p_DocDate = ko.observable('');
     self.p_MhltDate = ko.observable('');
     self.p_AmalDate = ko.observable('');
     self.p_EndDate = ko.observable('');
@@ -52,7 +54,12 @@
 
     var useSanadOtherUser = true;
     var showHideResult = false;
-    var serialErja = 0;
+    var serialNumber = 0;
+
+
+    if (dateNow == null) {
+        getDateServer();
+    }
 
 
     function getErjDocH(log) {
@@ -206,11 +213,11 @@
                     + '         <h6>' + listBand[0].ToUserName + '</h6> '
                     + '     </div>'
 
-                + '     <div class="col-md form-inline"  style="direction:ltr"> '
-                + '         <h6 >' + listBand[0].RjDate + '</h6> '
-                + '         <h6 style="padding-left: 5px;">' + listBand[0].RjTimeSt + '</h6> '
-                + '         <h6 style="padding-left: 5px;">' + listBand[0].RjHour + '</h6> '
-                + '     </div> '
+                    + '     <div class="col-md form-inline"  style="direction:ltr"> '
+                    + '         <h6 >' + listBand[0].RjDate + '</h6> '
+                    + '         <h6 style="padding-left: 5px;">' + listBand[0].RjTimeSt + '</h6> '
+                    + '         <h6 style="padding-left: 5px;">' + listBand[0].RjHour + '</h6> '
+                    + '     </div> '
 
                     + '</div>';
 
@@ -270,13 +277,13 @@
 
     self.ViewDocH = function (item) {
 
-        serialErja = item.SerialNumber;
+        serialNumber = item.SerialNumber;
 
         editDoc = item.EditDocTrs && localStorage.getItem("CHG_ErjDOC")
         editDoc == true || editDoc == "true" ? $("#P_Action").show() : $("#P_Action").hide();
 
         flag_Save = false;
-       
+
 
         khdtHasTime = item.KhdtHasTime;
 
@@ -348,30 +355,22 @@
         $("#ExtraFields20").val(item.F20);
 
         docBMode = item.DocBMode;
-        serialErja = item.SerialNumber;
-        getErjResultList(serialErja, null, null, null)
-        getErjDocErja(serialErja);
+        serialNumber = item.SerialNumber;
+        getErjResultList(serialNumber, null, null, null)
+        getErjDocErja(serialNumber);
 
 
         if (self.ErjDocErja().length == 0) {
             $('#ErjDocErja').removeAttr('hidden', '');
-
-            //$('#ErjDocErja').prop('disabled', false);
         }
         else {
             $('#ErjDocErja').attr('hidden', '');
-            //$('#ErjDocErja').prop('disabled', true);
         }
 
 
         $('#saveDocH').removeAttr('hidden', '');
         $('#AddNewDocAttach').removeAttr('hidden', '');
 
-        if (useSanadOtherUser == true) {
-            $('#saveDocH').attr('hidden', '');
-            $('#ErjDocErja').attr('hidden', '');
-            $('#AddNewDocAttach').attr('hidden', '');
-        }
 
 
         $('#modal-DocH').modal('show');
@@ -461,53 +460,29 @@
     });
 
 
-    function SaveDocH() {
-
-        docDate = $("#p_DocDate").val().toEnglishDigit();
-        natijeh = $("#Result").val();
-        p_NameCust = $("#p_NameCust").val();
-        p_Motaghazi = $("#p_Motaghazi").val();
-        p_Status = $("#p_Status").val();
-        p_Spec = $("#p_Spec").val();
-        p_ActiveChat = $('#ActiveChat').is(':checked');
-
-
-    }
-
-
-    $('#saveDocH').click(function () {
-        SaveDocH();
-    });
 
 
     $('#Close_ModalErj').click(function () {
         $('#modal-Erja').modal('hide');
     })
 
-    $('#SendDocH').click(function () {
+    $('#ErjDocErja').click(function () {
+        getErjUsersList(serialNumber);
         $('#modal-Erja').modal('show');
         $('#e_Result').val($('#Result').val());
     })
 
-
-
-    function getErjUsersList(serial) {
-        var ErjUsersObject = {
-            userCode: userName,
-            SerialNumber: serial,
-        }
-        ajaxFunction(ErjUsersUri, 'Post', ErjUsersObject).done(function (data) {
-            self.ErjUsersList(data);
-        });
-    }
+    $('#modal-Erja').on('shown.bs.modal', function () {
+        $('#e_Result').val();
+        $('#p_ErjUser').val('');
+        $('#p_RoneveshtBe').val('');
+        $('#RjMhltDate').val('');
+        $('#RjTime_M').val('');
+        $('#RjTime_H').val('');
+    });
 
 
 
-
-
-    $('#saveErja').click(function () {
-        SaveErja();
-    })
 
 
     var DocAttachUri = server + '/api/KarbordData/DocAttach/'; // آدرس لیست پیوست 
@@ -530,7 +505,7 @@
             self.DocAttachList(data);
         });
     }
-  
+
 
     $('#refreshDocAttach').click(function () {
         Swal.fire({
@@ -545,14 +520,14 @@
             confirmButtonText: 'بله'
         }).then((result) => {
             if (result.value) {
-                getDocAttachList(serialErja);
+                getDocAttachList(serialNumber);
             }
         })
     })
 
 
     $('#attachFile').click(function () {
-        getDocAttachList(serialErja);
+        getDocAttachList(serialNumber);
     });
 
 
@@ -591,6 +566,147 @@
     }
 
 
+
+    function getErjUsersList(serial) {
+        var ErjUsersObject = {
+            userCode: userName,
+            SerialNumber: serial,
+        }
+        ajaxFunction(ErjUsersUri, 'Post', ErjUsersObject).done(function (data) {
+            self.ErjUsersList(data);
+        });
+    }
+
+
+    $('#saveErja').click(function () {
+
+        natijeh = $("#e_Result").val();
+        rjTime_H = $("#RjTime_H").val();
+        rjTime_M = $("#RjTime_M").val();
+
+        erjUsersCode = $('#p_ErjUser').val();
+        roneveshtBe = $('#p_RoneveshtBe').val();
+
+
+        if (erjUsersCode == null) {
+            return showNotification(translate('ارجاع شونده را انتخاب کنید'), 0);
+        }
+
+        if ((khdtHasTime == 1) && (rjTime_H == '' && rjTime_M == '' || rjTime_H == '0' && rjTime_M == '0')) {
+            rjTime_H = '';
+            rjTime_M = '';
+            return showNotification(translate('زمان صرف شده را وارد کنید'), 0);
+        }
+
+        if (natijeh == '') {
+            return showNotification(translate('متن ارجاع را وارد کنید'), 0);
+        }
+
+        if (erjUsersCode == roneveshtBe) {
+            return showNotification(translate('امکان رونوشت به کاربر ارجاع شونده وجود ندارد'), 0);
+        }
+
+        ErjSaveDoc_BSave(erjUsersCode, 0);
+
+        if (roneveshtBe != null) {
+            ErjSaveDoc_CSave(roneveshtBe);
+        }
+
+        getErjDocErja(serialNumber);
+        $('#modal-Erja').modal('hide');
+        list_ErjUsersRoneveshtSelect = new Array();
+        counterErjUsersRonevesht = 0;
+        $('#modal-ErjDocErja').modal('hide');
+        $('#modal-ErjDocH').modal('hide');
+        currentPage = self.currentPageIndexErjDocH();
+        getErjDocH($('#pageCountSelector').val(), currentPage, self.StatusParvandehSelect(), self.DocYearsSelect(), '', false);
+        self.sortTableErjDocH();
+
+        //getErjDocH($('#pageCountSelector').val(), 0);
+        //self.sortTableErjDocH();
+    })
+
+    //Add DocB  ذخیره ارجاعات
+    function ErjSaveDoc_BSave(toUserCode, bandNoImput) {
+        rjDate = dateNow;
+        rjMhltDate = $("#RjMhltDate").val().toEnglishDigit();
+        rjTime_H = $("#RjTime_H").val();
+        rjTime_M = $("#RjTime_M").val();
+
+
+        rjTime = 0;
+        if (rjTime_H != '' || rjTime_M != '') {
+
+            if (rjTime_M != '') {
+                rjTime_M = parseInt(rjTime_M);
+                rjTime_M = rjTime_M / 60;
+            }
+            else {
+                rjTime_M = parseInt('0');
+            }
+
+            if (rjTime_H != '') {
+                rjTime_H = parseInt(rjTime_H);
+            }
+            else {
+                rjTime_H = parseInt("0");
+            }
+
+
+            rjTime = rjTime_H + rjTime_M;
+        }
+
+
+        var ErjSaveDoc_BSaveObject;
+        if (bandNoImput == 0) { // erja
+            natijeh = $("#e_Result").val();
+
+            if (natijeh == '') {
+                return showNotification(translate('متن ارجاع را وارد کنید'), 0);
+            }
+            getTimeServer();
+            ErjSaveDoc_BSaveObject = {
+                SerialNumber: serialNumber,
+                Natijeh: natijeh,
+                FromUserCode: userName,
+                ToUserCode: toUserCode,
+                RjDate: '',//rjDate,
+                RjTime: rjTime,
+                RjMhltDate: rjMhltDate,
+                BandNo: bandNoImput,
+                RjStatus: '',
+                FarayandCode: '',
+                RjHour: timeNow
+            };
+        }
+
+        ajaxFunction(ErjSaveDoc_BSaveUri, 'POST', ErjSaveDoc_BSaveObject).done(function (response) {
+            $("#TableBodyListErjUsersRonevesht").empty();
+        });
+    };
+
+
+
+    //Add DocC  ذخیره رونوشت
+    function ErjSaveDoc_CSave(roneveshtBe) {
+        rjDate = dateNow;
+        var obj = [];
+        tmp = {
+            'SerialNumber': serialNumber,
+            'BandNo': 1,
+            'Natijeh': '',
+            'ToUserCode': roneveshtBe,
+            'RjDate': rjDate,
+            'RjTime': 0,
+            'RjHour': timeNow
+        };
+        obj.push(tmp);
+
+        ajaxFunction(ErjSaveDoc_CSaveUri, 'POST', obj).done(function (response) {
+            $('#modal-Erja').modal('hide');
+            $('#modal-DocH').modal('hide');
+        });
+    };
 
 };
 

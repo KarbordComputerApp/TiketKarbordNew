@@ -308,38 +308,6 @@
                         <div id="BodyErjDocH" style="height:500px;overflow:auto;border: 1px #ddd solid;border-radius: 20px;">
 
 
-
-                            <!--  <div style="border-top: 0px solid #fff !important;">
-                                  <div>
-                                      <div class="cardErj">
-                                          <div class="header" style="background-color: #e37d228f;">
-                                              <div class="form-inline">
-                                                  <div class="col-md-9 form-inline">
-                                                      <h6>1 ) سوپروایزر</h6>
-                                                      <img src="~/Content/img/new item/arrow-back-svgrepo-com.svg" style="width: 14px;margin-left: 3px; margin-right: 3px;" />
-                                                      <h6>حمید رضا حجازی</h6>
-                                                  </div>
-                                                  <div class="col-md-3 form-inline">
-                                                      <h6 style="padding-left: 10px">(1:0)</h6>
-                                                      <h6>1399/01/12</h6>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="body" style="padding:10px;">
-                                              <p>تست </p>
-                                              <p>مدیر سیستم به مهندس</p>
-                                              <br>
-                                              <div style="padding: 3px;margin: 0px 10px 0px 10px;background-color: #5b6775 !important;color: white;border-radius: 10px;">
-                                                  <div class=" form-inline">
-                                                      <h6> رونوشت به :کاربر 1 امیری</h6>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>-->
-
-
                         </div>
                     </div>
                 </div>
@@ -347,7 +315,7 @@
             <div>
                 <div class="row  form-inline ">
                     <div class="col-md-9 row">
-                        
+
                         <div id="panelFooterParvandeh" class="col-md-12 row">
                             <p class="col-md-2">وضعیت ارجاع</p>
                             <div class="col-md-3">
@@ -407,12 +375,9 @@
 
 
                     </div>
-
-                    <div class="col-md-3 col-sm-12 ">
-                        <!--<button  data-bind="text:translate('0')" type="button" id="erja" class="btn btn-primary  pull-left dropdown-toggle" data-toggle="modal" data-target="#modal-Erja" data-backdrop="static" data-keyboard="false"><i class="fa fa-sign-in fa-lg fa-fw"></i>ارجاع</button>-->
-                       <!-- <button data-bind="text:translate('ارجاع')" type="button" id="erja" class="btn btn-primary  pull-left"><i class="fa fa-sign-in fa-lg fa-fw"></i></button>
-                        <button data-bind="text:translate('ذخیره')" type="button" id="saveParvandeh" class="btn btn-primary  pull-left" style=" margin-left: 8px;"><i class="fa fa-sign-in fa-lg fa-fw"></i></button>
-                   --> </div>
+                    <div class="col-md-3">
+                        <button data-bind="text:translate('ارجاع')" type="button" id="erja" class="btn btn-primary  pull-left">ارجاع</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -518,7 +483,7 @@
                         <div class="col-md-3 col-sm-12">
                             <div class="form-inline">
                                 <div class="form-group">
-                                    <select id="p_ErjUser" data-bind="options: ErjUsersList,
+                                    <select id="p_RoneveshtBe" data-bind="options: ErjUsersList,
                                                            optionsText: function(item) {return item.Name},
                                                            optionsValue: 'Code'" style="font-size:11px"></select>
                                 </div>
