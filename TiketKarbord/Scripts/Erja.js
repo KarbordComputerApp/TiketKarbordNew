@@ -19,6 +19,8 @@
     self.ErjDocErja = ko.observableArray([]); // لیست پرونده  
     self.ErjStatusList = ko.observableArray([]); // لیست وضعیت 
 
+    self.ErjMode = ko.observable();
+
     if (dateNow == null) {
         getDateServer();
     }
@@ -35,11 +37,13 @@
     var showHideSpec = false;
 
     erjaMode = erjaMode == null ? "1" : erjaMode;
-
+    self.ErjMode(erjaMode);
     if (erjaMode == "1") {
         $("#title_erja").text(translate('ارجاعات پرونده دریافتی'));
         $("#titlePage").text(translate('ارجاعات پرونده دریافتی'));
         $("#titleSaveErja").text(translate('ارجاع جدید'));
+        $(".t_CaptionErja").text("ارجاع دهنده :");
+       
         AddDocBMode();
         $('#showDocBMode').css('display', 'block');
     }
@@ -47,6 +51,7 @@
         $("#title_erja").text(translate('ارجاعات پرونده ارسالی'));
         $("#titlePage").text(translate('ارجاعات پرونده ارسالی'));
         $("#titleSaveErja").text(translate('تغییر ارجاع'));
+        $(".t_CaptionErja").text("ارجاع شونده :");
         $('#showDocBMode').css('display', 'none');
     }
 
