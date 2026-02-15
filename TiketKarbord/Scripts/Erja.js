@@ -19,7 +19,7 @@
     self.ErjDocErja = ko.observableArray([]); // لیست پرونده  
     self.ErjStatusList = ko.observableArray([]); // لیست وضعیت 
 
-    self.ErjMode = ko.observable();
+    self.ErjMode = ko.observable("");
 
     if (dateNow == null) {
         getDateServer();
@@ -38,6 +38,7 @@
 
     erjaMode = erjaMode == null ? "1" : erjaMode;
     self.ErjMode(erjaMode);
+
     if (erjaMode == "1") {
         $("#title_erja").text(translate('ارجاعات پرونده دریافتی'));
         $("#titlePage").text(translate('ارجاعات پرونده دریافتی'));
@@ -120,6 +121,10 @@
     }
 
     getDocB_Last();
+
+    self.ErjUserName = function (fromUserName, toUserName) {
+        return erjaMode == "1" ? fromUserName : toUserName;
+    }
 
     self.DocBModeChange = function () {
         getDocB_Last();
@@ -323,6 +328,7 @@
 
 
 
+       /*
         if (Band.RjReadSt == 'T' && sessionStorage.ModeCodeErja == "1") {
             ErjSaveDoc_RjRead_Object = {
                 DocBMode: Band.DocBMode,
@@ -335,6 +341,7 @@
                 //AlertErja();
             });
         }
+        */
         $('#modal-ErjDocErja').modal('show');
 
     }

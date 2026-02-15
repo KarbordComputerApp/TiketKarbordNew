@@ -1,7 +1,7 @@
 ﻿var lockNumber = 10000;
-var server = "http://localhost:52798/";
+//var server = "http://localhost:52798/";
 //var server = 'http://192.168.0.106:1000/';  
-//var server = 'http://185.208.174.64:8001/';
+var server = 'http://185.208.174.64:8001/';
 
 var userName = localStorage.getItem('userNameTiket');
 var userNameFa = localStorage.getItem('userNameFaTiket');
